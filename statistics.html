@@ -12,7 +12,6 @@
   gtag('config', 'UA-89644431-2');
 </script>
 
-
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>7 推測統計 | いつか役に立つかもしれない資料</title>
@@ -110,7 +109,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="index.html">トップページ</a></li>
+<li><a href="./">トップページ</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに（服用上の注意）</a></li>
@@ -195,7 +194,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.5" data-path="data-handling.html"><a href="data-handling.html#section-9.5"><i class="fa fa-check"></i><b>9.5</b> 結合</a></li>
 <li class="chapter" data-level="9.6" data-path="data-handling.html"><a href="data-handling.html#section-9.6"><i class="fa fa-check"></i><b>9.6</b> ロングフォーマット</a></li>
 <li class="chapter" data-level="9.7" data-path="data-handling.html"><a href="data-handling.html#section-9.7"><i class="fa fa-check"></i><b>9.7</b> データファイルの読み込み</a></li>
-<li class="chapter" data-level="9.8" data-path="introduction.html"><a href="introduction.html#ggplot2"><i class="fa fa-check"></i><b>9.8</b> ggplot2と一緒に使う</a></li>
+<li class="chapter" data-level="9.8" data-path="introduction.html"><a href="introduction.html#ggplot2"><i class="fa fa-check"></i><b>9.8</b> ggplot2との併用</a></li>
 </ul></li>
 <li class="part"><span><b>巻末資料</b></span></li>
 <li class="chapter" data-level="" data-path="e382aae383b3e383a9e382a4e383b3e8b387e69699.html"><a href="e382aae383b3e383a9e382a4e383b3e8b387e69699.html"><i class="fa fa-check"></i>オンライン資料</a></li>
@@ -268,7 +267,7 @@ Figure 7.1: エラーバー付きの棒グラフ。エラーバーは標準誤�
 </ul></li>
 <li><p><code>geom_errorbar(aes(ymin = Weight - se, ymax = Weight + se), position = position_dodge(width = 0.9), width = 0.2)</code></p>
 <ul>
-<li><p>エラーバー。<code>ymin</code>と<code>ymax</code>には、それぞれエラーバーの上端と下端のy座標を指定する。</p></li>
+<li><p>エラーバー。<code>ymin</code>と<code>ymax</code>には、それぞれエラーバーの下端と上端のy座標を指定する。</p></li>
 <li><p><code>position = position_dodge(width = 0.9)</code>とすることで、エラーバーを棒グラフのように水平方向にずらすことができる。棒グラフのずらし幅が0.9なので、エラーバーの<code>width</code>（ずらし幅）も0.9にする<a href="#fn21" class="footnoteRef" id="fnref21"><sup>21</sup></a>。</p></li>
 <li><p>最後の<code>width</code>はエラーバーの横幅を表している。デフォルトだと、棒グラフの棒と同じ幅になる。</p></li>
 </ul></li>
@@ -342,6 +341,7 @@ Figure 7.3: 散布図の上に回帰直線を描いたグラフ。網掛けの�
 Figure 7.4: こどもの性別ごとに回帰直線を描いたグラフ。網掛けの部分は95%信頼区間を表している。
 </p>
 </div>
+<p>もちろん、線形モデル以外のフィッティングも可能である。詳しくはGoogle先生が教えてくれるだろう。</p>
 </div>
 <div id="-4" class="section level2">
 <h2><span class="header-section-number">7.4</span> 練習問題</h2>

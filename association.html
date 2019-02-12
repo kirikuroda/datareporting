@@ -12,7 +12,6 @@
   gtag('config', 'UA-89644431-2');
 </script>
 
-
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>5 連続変数間の関係 | いつか役に立つかもしれない資料</title>
@@ -110,7 +109,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="index.html">トップページ</a></li>
+<li><a href="./">トップページ</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに（服用上の注意）</a></li>
@@ -195,7 +194,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.5" data-path="data-handling.html"><a href="data-handling.html#section-9.5"><i class="fa fa-check"></i><b>9.5</b> 結合</a></li>
 <li class="chapter" data-level="9.6" data-path="data-handling.html"><a href="data-handling.html#section-9.6"><i class="fa fa-check"></i><b>9.6</b> ロングフォーマット</a></li>
 <li class="chapter" data-level="9.7" data-path="data-handling.html"><a href="data-handling.html#section-9.7"><i class="fa fa-check"></i><b>9.7</b> データファイルの読み込み</a></li>
-<li class="chapter" data-level="9.8" data-path="introduction.html"><a href="introduction.html#ggplot2"><i class="fa fa-check"></i><b>9.8</b> ggplot2と一緒に使う</a></li>
+<li class="chapter" data-level="9.8" data-path="introduction.html"><a href="introduction.html#ggplot2"><i class="fa fa-check"></i><b>9.8</b> ggplot2との併用</a></li>
 </ul></li>
 <li class="part"><span><b>巻末資料</b></span></li>
 <li class="chapter" data-level="" data-path="e382aae383b3e383a9e382a4e383b3e8b387e69699.html"><a href="e382aae383b3e383a9e382a4e383b3e8b387e69699.html"><i class="fa fa-check"></i>オンライン資料</a></li>
@@ -265,7 +264,7 @@ Figure 5.2: グルーピングされた散布図。
 </div>
 <p>見やすさや色覚バリアフリーという観点に立てば、点の形も変えたほうが良いだろう<a href="#fn15" class="footnoteRef" id="fnref15"><sup>15</sup></a>。ドットの形を変えるには、<code>shape</code>に変数を指定すれば良い。</p>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(disp, mpg, <span class="dt">color =</span> <span class="kw">factor</span>(cyl), <span class="dt">shape =</span> <span class="kw">factor</span>(cyl))) <span class="op">+</span><span class="st"> </span><span class="co"># shape = factor(year)を追加</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(disp, mpg, <span class="dt">color =</span> <span class="kw">factor</span>(cyl), <span class="dt">shape =</span> <span class="kw">factor</span>(cyl))) <span class="op">+</span><span class="st"> </span><span class="co"># shape = factor(cyl)を追加</span>
 <span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-52"></span>
 <img src="lecture_note_files/figure-html/unnamed-chunk-52-1.png" alt="Figure 5.2のドットの形を変えた散布図。" width="768" />
@@ -306,21 +305,29 @@ Figure 5.5: Figure <a href="association.html#fig:scatter-plot-matrix-1">5.4</a>�
 <p>最後に、オーバープロットというものへの対処法を見ていくことにする。具体例として、ggplot2に入っている<code>mpg</code>データを使ってみよう。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(mpg) <span class="co"># 先頭6行</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 11
-##   manufacturer model displ  year   cyl trans  drv     cty   hwy fl    class
-##   &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;  &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
-## 1 audi         a4      1.8  1999     4 auto(… f        18    29 p     comp…
-## 2 audi         a4      1.8  1999     4 manua… f        21    29 p     comp…
-## 3 audi         a4      2    2008     4 manua… f        20    31 p     comp…
-## 4 audi         a4      2    2008     4 auto(… f        21    30 p     comp…
-## 5 audi         a4      2.8  1999     6 auto(… f        16    26 p     comp…
-## 6 audi         a4      2.8  1999     6 manua… f        18    26 p     comp…</code></pre>
+##   manufacturer model displ  year   cyl trans      drv     cty   hwy fl   
+##   &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;
+## 1 audi         a4      1.8  1999     4 auto(l5)   f        18    29 p    
+## 2 audi         a4      1.8  1999     4 manual(m5) f        21    29 p    
+## 3 audi         a4      2    2008     4 manual(m6) f        20    31 p    
+## 4 audi         a4      2    2008     4 auto(av)   f        21    30 p    
+## 5 audi         a4      2.8  1999     6 auto(l5)   f        16    26 p    
+## 6 audi         a4      2.8  1999     6 manual(m5) f        18    26 p    
+##   class  
+##   &lt;chr&gt;  
+## 1 compact
+## 2 compact
+## 3 compact
+## 4 compact
+## 5 compact
+## 6 compact</code></pre>
 <p>注目する変数は、</p>
 <ul>
 <li><p><code>displ</code>：エンジンの排気量（リットル）</p></li>
 <li><p><code>hwy</code>：燃費（マイル／ガロン）</p></li>
 <li><p><code>cyl</code>：シリンダー数（4, 5, 6, or 8）</p></li>
 </ul>
-<p>の2つである。早速、<code>x</code>に<code>displ</code>、<code>y</code>に<code>hwy</code>、<code>color</code>に<code>factor(cyl)</code>を指定して散布図を描いてみよう。</p>
+<p>の3つである。早速、<code>x</code>に<code>displ</code>、<code>y</code>に<code>hwy</code>、<code>color</code>に<code>factor(cyl)</code>を指定して散布図を描いてみよう。</p>
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy, <span class="dt">color =</span> <span class="kw">factor</span>(cyl))) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>

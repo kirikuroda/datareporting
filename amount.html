@@ -12,7 +12,6 @@
   gtag('config', 'UA-89644431-2');
 </script>
 
-
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>3 数量 | いつか役に立つかもしれない資料</title>
@@ -110,7 +109,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="index.html">トップページ</a></li>
+<li><a href="./">トップページ</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに（服用上の注意）</a></li>
@@ -195,7 +194,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.5" data-path="data-handling.html"><a href="data-handling.html#section-9.5"><i class="fa fa-check"></i><b>9.5</b> 結合</a></li>
 <li class="chapter" data-level="9.6" data-path="data-handling.html"><a href="data-handling.html#section-9.6"><i class="fa fa-check"></i><b>9.6</b> ロングフォーマット</a></li>
 <li class="chapter" data-level="9.7" data-path="data-handling.html"><a href="data-handling.html#section-9.7"><i class="fa fa-check"></i><b>9.7</b> データファイルの読み込み</a></li>
-<li class="chapter" data-level="9.8" data-path="introduction.html"><a href="introduction.html#ggplot2"><i class="fa fa-check"></i><b>9.8</b> ggplot2と一緒に使う</a></li>
+<li class="chapter" data-level="9.8" data-path="introduction.html"><a href="introduction.html#ggplot2"><i class="fa fa-check"></i><b>9.8</b> ggplot2との併用</a></li>
 </ul></li>
 <li class="part"><span><b>巻末資料</b></span></li>
 <li class="chapter" data-level="" data-path="e382aae383b3e383a9e382a4e383b3e8b387e69699.html"><a href="e382aae383b3e383a9e382a4e383b3e8b387e69699.html"><i class="fa fa-check"></i>オンライン資料</a></li>
@@ -242,7 +241,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><p><code>group</code>：実験の条件（3水準）</p></li>
 <li><p><code>weight</code>：植物の重さの平均値</p></li>
 </ul>
-<p>を表している。素朴に思いつくのは、「条件をx軸に、重さをy軸に取った棒グラフ」だろう。数量を表す棒グラフは、<code>geom_bar()</code>をで描くことができる。</p>
+<p>を表している。素朴に思いつくのは、「条件をx軸に、重さをy軸に取った棒グラフ」だろう。数量を表す棒グラフは、<code>geom_bar()</code>で描くことができる。</p>
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(pg_mean, <span class="kw">aes</span>(group, weight)) <span class="op">+</span><span class="st"> </span><span class="co"># x軸にgroup、y軸にweight</span>
 <span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>) <span class="co"># 棒グラフ；stat = &quot;identity&quot;が必要</span></code></pre></div>
@@ -253,7 +252,7 @@ Figure 3.1: 棒グラフ。x軸は条件、y軸は植物の平均重量を表し
 </p>
 </div>
 <p>なお、データの数値を棒グラフで描く際は、<code>stat = &quot;identity&quot;</code>と設定する必要がある。なぜなら、<code>geom_bar()</code>は、データの<strong>個数</strong>を描くのがデフォルト（<code>stat = &quot;count&quot;</code>という設定）になっているからである<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a>。</p>
-<p>気になる人は、<code>stat = &quot;identity&quot;</code>の部分を消してコードを実行してみよう。<code>エラー: stat_count() must not be used with a y aesthetic.</code>というエラーメッセージが出て、プロットできないはずである<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a>。</p>
+<p>気になる人は、<code>stat = &quot;identity&quot;</code>の部分を消してコードを実行してみよう。<code>エラー: stat_count() must not be used with a y aesthetic.</code>というメッセージが出てきて、プロットできないはずである<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a>。</p>
 </div>
 <div id="section-3.1.2" class="section level3">
 <h3><span class="header-section-number">3.1.2</span> グルーピングされた棒グラフ</h3>
@@ -379,7 +378,7 @@ Figure 3.5: Clevelandのドットプロット（2001年MLBトップ20の打率�
 <li><p><code>geom_point()</code></p>
 <ul>
 <li><p>データをドットで表現するための関数。</p></li>
-<li><p>ちなみに、<code>geom_point()</code>では<code>stat = &quot;identity&quot;</code>がデフォルトなので、<code>geom_bar()</code>とは異なり、<code>stat</code>の中身を明示的に指定する必要がない。</p></li>
+<li><p>ちなみに、<code>geom_point()</code>では<code>stat = &quot;identity&quot;</code>がデフォルトである。そのため<code>geom_bar()</code>とは異なり、<code>stat</code>の中身を明示的に指定する必要がない。</p></li>
 </ul></li>
 </ol>
 <p><br></p>

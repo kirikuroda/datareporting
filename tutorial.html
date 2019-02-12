@@ -12,7 +12,6 @@
   gtag('config', 'UA-89644431-2');
 </script>
 
-
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>2 チュートリアル | いつか役に立つかもしれない資料</title>
@@ -110,7 +109,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="index.html">トップページ</a></li>
+<li><a href="./">トップページ</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに（服用上の注意）</a></li>
@@ -195,7 +194,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.5" data-path="data-handling.html"><a href="data-handling.html#section-9.5"><i class="fa fa-check"></i><b>9.5</b> 結合</a></li>
 <li class="chapter" data-level="9.6" data-path="data-handling.html"><a href="data-handling.html#section-9.6"><i class="fa fa-check"></i><b>9.6</b> ロングフォーマット</a></li>
 <li class="chapter" data-level="9.7" data-path="data-handling.html"><a href="data-handling.html#section-9.7"><i class="fa fa-check"></i><b>9.7</b> データファイルの読み込み</a></li>
-<li class="chapter" data-level="9.8" data-path="introduction.html"><a href="introduction.html#ggplot2"><i class="fa fa-check"></i><b>9.8</b> ggplot2と一緒に使う</a></li>
+<li class="chapter" data-level="9.8" data-path="introduction.html"><a href="introduction.html#ggplot2"><i class="fa fa-check"></i><b>9.8</b> ggplot2との併用</a></li>
 </ul></li>
 <li class="part"><span><b>巻末資料</b></span></li>
 <li class="chapter" data-level="" data-path="e382aae383b3e383a9e382a4e383b3e8b387e69699.html"><a href="e382aae383b3e383a9e382a4e383b3e8b387e69699.html"><i class="fa fa-check"></i>オンライン資料</a></li>
@@ -308,7 +307,7 @@ Figure 2.3: コードは若干違うが、上のFigure <a href="tutorial.html#fi
 <p>である。このとき「シリンダーの個数によって、排気量と燃費の関係は違うのではないか？」ということが思いつく。</p>
 <p>それでは、<code>cyl</code>によって点の色を変えてみよう。以下のコードを書けばOKである。</p>
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(disp, mpg, <span class="dt">color =</span> cyl)) <span class="op">+</span><span class="st"> </span><span class="co"># color = year を追加</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(disp, mpg, <span class="dt">color =</span> cyl)) <span class="op">+</span><span class="st"> </span><span class="co"># color = cyl を追加</span>
 <span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-14"></span>
 <img src="lecture_note_files/figure-html/unnamed-chunk-14-1.png" alt="シリンダーの個数を点の色に対応づけた散布図。" width="768" />
@@ -321,7 +320,7 @@ Figure 2.4: シリンダーの個数を点の色に対応づけた散布図。
 <p><u><strong>しかし、このグラフは厳密には間違っている。</strong></u>どこが間違っているのだろうか？　少し考えてみてほしい。</p>
 <p><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></p>
 <p><strong>答え</strong></p>
-<p>図の右側の青いバー（<u><strong>凡例</strong></u>；legend）を見ると、その横にシリンダーの個数が連続変数として1刻みで描かれれている（4,5,6,7,8）。しかし、実際のデータには4,6,8という3種類の値しかない。もちろん個数は連続的なものだが、この場合は<u><strong>離散変数</strong></u>（discrete variable；質的変数、qualitative/categorical/factor variableとも言う）として扱ったほうがデータの表現として妥当だろう<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>。</p>
+<p>図の右側の青いバー（<u><strong>凡例</strong></u>；legend）を見ると、その横にシリンダーの個数が連続変数として1刻みで描かれれている（4,5,6,7,8）。しかし、実際のデータには4,6,8という3種類の値しかない。もちろん個数は連続的なものだが、この場合は<u><strong>離散変数</strong></u>（discrete variable；質的変数、qualitative/categorical/factor variableとも言う）として扱ったほうがデータの表現として妥当だし、見やすくなるだろう<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>。</p>
 <p>この場合、<code>cyl</code>を<code>factor()</code>でくくると解決する。</p>
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(disp, mpg, <span class="dt">color =</span> <span class="kw">factor</span>(cyl))) <span class="op">+</span><span class="st"> </span><span class="co"># factor(cyl)に変更</span>

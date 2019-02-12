@@ -12,7 +12,6 @@
   gtag('config', 'UA-89644431-2');
 </script>
 
-
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>9 データハンドリング | いつか役に立つかもしれない資料</title>
@@ -110,7 +109,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="index.html">トップページ</a></li>
+<li><a href="./">トップページ</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに（服用上の注意）</a></li>
@@ -195,7 +194,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.5" data-path="data-handling.html"><a href="data-handling.html#section-9.5"><i class="fa fa-check"></i><b>9.5</b> 結合</a></li>
 <li class="chapter" data-level="9.6" data-path="data-handling.html"><a href="data-handling.html#section-9.6"><i class="fa fa-check"></i><b>9.6</b> ロングフォーマット</a></li>
 <li class="chapter" data-level="9.7" data-path="data-handling.html"><a href="data-handling.html#section-9.7"><i class="fa fa-check"></i><b>9.7</b> データファイルの読み込み</a></li>
-<li class="chapter" data-level="9.8" data-path="introduction.html"><a href="introduction.html#ggplot2"><i class="fa fa-check"></i><b>9.8</b> ggplot2と一緒に使う</a></li>
+<li class="chapter" data-level="9.8" data-path="introduction.html"><a href="introduction.html#ggplot2"><i class="fa fa-check"></i><b>9.8</b> ggplot2との併用</a></li>
 </ul></li>
 <li class="part"><span><b>巻末資料</b></span></li>
 <li class="chapter" data-level="" data-path="e382aae383b3e383a9e382a4e383b3e8b387e69699.html"><a href="e382aae383b3e383a9e382a4e383b3e8b387e69699.html"><i class="fa fa-check"></i>オンライン資料</a></li>
@@ -222,7 +221,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="data-handling" class="section level1">
 <h1><span class="header-section-number">9</span> データハンドリング</h1>
-<p>ここまで、ggplot2を使ったデータの可視化を見てきた。ただし、ggplot2で作図をする際、大きな前提条件がある。それは、<u><strong>データを行列の形で用意しなければいけない</strong></u>というものである。つまり、変数を列に、観測値を行に取るようなデータ構造にあらかじめ整形しなければならないということである。</p>
+<p>ここまで、ggplot2を使ったデータの可視化を見てきた。ただし、ggplot2で作図をする際、大きな前提条件がある。それは、<u><strong>データを行列（データフレームもしくはtibbleと呼ばれる形式）で用意しなければいけない</strong></u>というものである。つまり、変数を列に、観測値を行に取るようなデータ構造にあらかじめ整形しなければならないということである。</p>
 <p>たとえば、今まで使ってきた<code>mtcars</code>、<code>faithful</code>のデータ構造を改めて見てみよう。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(mtcars) <span class="co"># 先頭6行</span></code></pre></div>
 <pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
@@ -240,16 +239,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 4     2.283      62
 ## 5     4.533      85
 ## 6     2.883      55</code></pre>
-<p>どちらも、列に変数名、行に観測値という構造をもっている。</p>
+<p>どちらも、列に変数名、行に観測値という構造になっている。</p>
 <hr />
 <p>散布図、箱ひげ図、ヒストグラムのように、これらのデータの素値をプロットする際、データハンドリングはあまり問題にならない。しかし、実際は平均値や標準誤差のように、何かしらの統計的処理を施した値をプロットしたいこともある。また、ある1つのグループのデータだけをプロットしたいという場合もある。</p>
 <p>可視化の際に直面する問題は、おおよそ以下の3つに大別できるだろう。</p>
+<p><br></p>
 <ul>
-<li><p>1つのグループのデータだけを抽出した上でプロットしたい（たとえば、3条件のうち統制条件だけプロットしたい、など）</p></li>
-<li><p>素値ではなく、平均値や標準誤差などの統計量をプロットしたい</p></li>
-<li><p>2つ以上のデータフレームを結合してプロットしたい</p></li>
+<li><p><u><strong>1つのグループのデータだけを抽出した上でプロットしたい</strong></u>（たとえば、3条件のうち統制条件だけプロットしたい、など）</p></li>
+<li><p><u><strong>素値ではなく、平均値や標準誤差などの統計量をプロットしたい</strong></u></p></li>
+<li><p><u><strong>2つ以上のデータフレームを結合してプロットしたい</strong></u></p></li>
 </ul>
-<p>などである。これらの問題は、いずれもtidyverseと呼ばれるパッケージ群を使えば解決する。</p>
+<p><br></p>
+<p>などである。これらの問題は、いずれも<u><strong>tidyverse</strong></u>と呼ばれるパッケージ群を使えば解決する。</p>
 <div id="tidyverse" class="section level2">
 <h2><span class="header-section-number">9.1</span> tidyverse</h2>
 <p>データハンドリングに使うパッケージ群（複数のパッケージ）はtidyverseと呼ばれており、<code>library(tidyverse)</code>で読み込むことができる。ちなみにggplot2もtidyverseの一部なので、自動的に読み込まれる。下のコードを実行すると色々メッセージが出るかもしれないが、気にしなくて良い。</p>
@@ -260,89 +261,150 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">9.2</span> 抽出</h2>
 <div id="section-9.2.1" class="section level3">
 <h3><span class="header-section-number">9.2.1</span> データの値で絞り込み</h3>
-<p>データの値によって絞り込みを行いたい時がある。たとえば、<code>mpg</code>であれば、<code>manufacturer</code>の種類でデータを絞り込みたい（データの行単位で抽出したい）ということである。実際の実験データで言えば、男性／女性のデータのみ抽出したいというような場面である。</p>
+<p>データの値によって絞り込みを行いたい時がある。たとえば、<code>mpg</code>であれば、<code>manufacturer</code>の種類でデータを絞り込みたい（データの行単位で抽出したい）ということである。心理学の実験データで言えば、男性／女性のデータのみ抽出したいというような場面を想像してみてほしい。</p>
 <p>このようなときは、<code>filter(抽出条件)</code>を使えば良い。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mpg <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(manufacturer <span class="op">==</span><span class="st"> &quot;audi&quot;</span>) <span class="co"># manufacturerが&quot;audi&quot;のものだけを抽出</span></code></pre></div>
 <pre><code>## # A tibble: 18 x 11
-##    manufacturer model displ  year   cyl trans drv     cty   hwy fl    class
-##    &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
-##  1 audi         a4      1.8  1999     4 auto… f        18    29 p     comp…
-##  2 audi         a4      1.8  1999     4 manu… f        21    29 p     comp…
-##  3 audi         a4      2    2008     4 manu… f        20    31 p     comp…
-##  4 audi         a4      2    2008     4 auto… f        21    30 p     comp…
-##  5 audi         a4      2.8  1999     6 auto… f        16    26 p     comp…
-##  6 audi         a4      2.8  1999     6 manu… f        18    26 p     comp…
-##  7 audi         a4      3.1  2008     6 auto… f        18    27 p     comp…
-##  8 audi         a4 q…   1.8  1999     4 manu… 4        18    26 p     comp…
-##  9 audi         a4 q…   1.8  1999     4 auto… 4        16    25 p     comp…
-## 10 audi         a4 q…   2    2008     4 manu… 4        20    28 p     comp…
-## 11 audi         a4 q…   2    2008     4 auto… 4        19    27 p     comp…
-## 12 audi         a4 q…   2.8  1999     6 auto… 4        15    25 p     comp…
-## 13 audi         a4 q…   2.8  1999     6 manu… 4        17    25 p     comp…
-## 14 audi         a4 q…   3.1  2008     6 auto… 4        17    25 p     comp…
-## 15 audi         a4 q…   3.1  2008     6 manu… 4        15    25 p     comp…
-## 16 audi         a6 q…   2.8  1999     6 auto… 4        15    24 p     mids…
-## 17 audi         a6 q…   3.1  2008     6 auto… 4        17    25 p     mids…
-## 18 audi         a6 q…   4.2  2008     8 auto… 4        16    23 p     mids…</code></pre>
-<p>ここで、<code>==</code>は「等しい」ということを意味している。大体のプログラミング言語では、<code>==</code>が「等しい」<code>=</code>が「代入する」を意味するものである。</p>
-<p>ちなみに、<code>%&gt;%</code>はパイプ演算子と呼ばれており、オブジェクトを次の関数の第一引数に突っ込むという操作を表している。ちょっと何を言っているのか分からないと思うが、あまり気にしなくて良い。何をやっているのか、少なくとも直観的には分かるだろう。今はそれで大丈夫である。</p>
+##    manufacturer model      displ  year   cyl trans      drv     cty   hwy
+##    &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt; &lt;int&gt; &lt;int&gt;
+##  1 audi         a4           1.8  1999     4 auto(l5)   f        18    29
+##  2 audi         a4           1.8  1999     4 manual(m5) f        21    29
+##  3 audi         a4           2    2008     4 manual(m6) f        20    31
+##  4 audi         a4           2    2008     4 auto(av)   f        21    30
+##  5 audi         a4           2.8  1999     6 auto(l5)   f        16    26
+##  6 audi         a4           2.8  1999     6 manual(m5) f        18    26
+##  7 audi         a4           3.1  2008     6 auto(av)   f        18    27
+##  8 audi         a4 quattro   1.8  1999     4 manual(m5) 4        18    26
+##  9 audi         a4 quattro   1.8  1999     4 auto(l5)   4        16    25
+## 10 audi         a4 quattro   2    2008     4 manual(m6) 4        20    28
+## 11 audi         a4 quattro   2    2008     4 auto(s6)   4        19    27
+## 12 audi         a4 quattro   2.8  1999     6 auto(l5)   4        15    25
+## 13 audi         a4 quattro   2.8  1999     6 manual(m5) 4        17    25
+## 14 audi         a4 quattro   3.1  2008     6 auto(s6)   4        17    25
+## 15 audi         a4 quattro   3.1  2008     6 manual(m6) 4        15    25
+## 16 audi         a6 quattro   2.8  1999     6 auto(l5)   4        15    24
+## 17 audi         a6 quattro   3.1  2008     6 auto(s6)   4        17    25
+## 18 audi         a6 quattro   4.2  2008     8 auto(s6)   4        16    23
+##    fl    class  
+##    &lt;chr&gt; &lt;chr&gt;  
+##  1 p     compact
+##  2 p     compact
+##  3 p     compact
+##  4 p     compact
+##  5 p     compact
+##  6 p     compact
+##  7 p     compact
+##  8 p     compact
+##  9 p     compact
+## 10 p     compact
+## 11 p     compact
+## 12 p     compact
+## 13 p     compact
+## 14 p     compact
+## 15 p     compact
+## 16 p     midsize
+## 17 p     midsize
+## 18 p     midsize</code></pre>
+<p>ここで、<code>==</code>は「等しい」ということを意味している。大体のプログラミング言語では、<code>==</code>は「等しい」を、<code>=</code>は「代入する」を意味することに注意しよう。</p>
+<p>ちなみに、<code>%&gt;%</code>はパイプ演算子と呼ばれており、オブジェクトを次の関数の第一引数に突っ込むという操作を表している。ちょっと何を言っているのか分からないと思うが、あまり気にしなくて良い。上のコードで何がおこなわれているのか、少なくとも直観的には分かるだろう。今はそれで大丈夫である。</p>
 <hr />
 <p>複数条件で絞り込むこともできる。たとえば、「<code>manufacturer</code>が<code>&quot;audi&quot;</code>」<u><strong>かつ</strong></u>「<code>model</code>が<code>&quot;a4&quot;</code>」の行を抽出したい場合は、条件を<code>&amp;</code>で繋げば良い。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mpg <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(manufacturer <span class="op">==</span><span class="st"> &quot;audi&quot;</span> <span class="op">&amp;</span><span class="st"> </span>model <span class="op">==</span><span class="st"> &quot;a4&quot;</span>)</code></pre></div>
 <pre><code>## # A tibble: 7 x 11
-##   manufacturer model displ  year   cyl trans  drv     cty   hwy fl    class
-##   &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;  &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
-## 1 audi         a4      1.8  1999     4 auto(… f        18    29 p     comp…
-## 2 audi         a4      1.8  1999     4 manua… f        21    29 p     comp…
-## 3 audi         a4      2    2008     4 manua… f        20    31 p     comp…
-## 4 audi         a4      2    2008     4 auto(… f        21    30 p     comp…
-## 5 audi         a4      2.8  1999     6 auto(… f        16    26 p     comp…
-## 6 audi         a4      2.8  1999     6 manua… f        18    26 p     comp…
-## 7 audi         a4      3.1  2008     6 auto(… f        18    27 p     comp…</code></pre>
+##   manufacturer model displ  year   cyl trans      drv     cty   hwy fl   
+##   &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;
+## 1 audi         a4      1.8  1999     4 auto(l5)   f        18    29 p    
+## 2 audi         a4      1.8  1999     4 manual(m5) f        21    29 p    
+## 3 audi         a4      2    2008     4 manual(m6) f        20    31 p    
+## 4 audi         a4      2    2008     4 auto(av)   f        21    30 p    
+## 5 audi         a4      2.8  1999     6 auto(l5)   f        16    26 p    
+## 6 audi         a4      2.8  1999     6 manual(m5) f        18    26 p    
+## 7 audi         a4      3.1  2008     6 auto(av)   f        18    27 p    
+##   class  
+##   &lt;chr&gt;  
+## 1 compact
+## 2 compact
+## 3 compact
+## 4 compact
+## 5 compact
+## 6 compact
+## 7 compact</code></pre>
 <p><br></p>
 <p>「<code>manufacturer</code>が<code>&quot;audi&quot;</code>」<u><strong>または</strong></u>「<code>model</code>が<code>&quot;a4&quot;</code>」の行を抽出したい場合は、条件を<code>|</code>で繋げば良い。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mpg <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(manufacturer <span class="op">==</span><span class="st"> &quot;audi&quot;</span> <span class="op">|</span><span class="st"> </span>model <span class="op">==</span><span class="st"> &quot;a4&quot;</span>)</code></pre></div>
 <pre><code>## # A tibble: 18 x 11
-##    manufacturer model displ  year   cyl trans drv     cty   hwy fl    class
-##    &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
-##  1 audi         a4      1.8  1999     4 auto… f        18    29 p     comp…
-##  2 audi         a4      1.8  1999     4 manu… f        21    29 p     comp…
-##  3 audi         a4      2    2008     4 manu… f        20    31 p     comp…
-##  4 audi         a4      2    2008     4 auto… f        21    30 p     comp…
-##  5 audi         a4      2.8  1999     6 auto… f        16    26 p     comp…
-##  6 audi         a4      2.8  1999     6 manu… f        18    26 p     comp…
-##  7 audi         a4      3.1  2008     6 auto… f        18    27 p     comp…
-##  8 audi         a4 q…   1.8  1999     4 manu… 4        18    26 p     comp…
-##  9 audi         a4 q…   1.8  1999     4 auto… 4        16    25 p     comp…
-## 10 audi         a4 q…   2    2008     4 manu… 4        20    28 p     comp…
-## 11 audi         a4 q…   2    2008     4 auto… 4        19    27 p     comp…
-## 12 audi         a4 q…   2.8  1999     6 auto… 4        15    25 p     comp…
-## 13 audi         a4 q…   2.8  1999     6 manu… 4        17    25 p     comp…
-## 14 audi         a4 q…   3.1  2008     6 auto… 4        17    25 p     comp…
-## 15 audi         a4 q…   3.1  2008     6 manu… 4        15    25 p     comp…
-## 16 audi         a6 q…   2.8  1999     6 auto… 4        15    24 p     mids…
-## 17 audi         a6 q…   3.1  2008     6 auto… 4        17    25 p     mids…
-## 18 audi         a6 q…   4.2  2008     8 auto… 4        16    23 p     mids…</code></pre>
+##    manufacturer model      displ  year   cyl trans      drv     cty   hwy
+##    &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt; &lt;int&gt; &lt;int&gt;
+##  1 audi         a4           1.8  1999     4 auto(l5)   f        18    29
+##  2 audi         a4           1.8  1999     4 manual(m5) f        21    29
+##  3 audi         a4           2    2008     4 manual(m6) f        20    31
+##  4 audi         a4           2    2008     4 auto(av)   f        21    30
+##  5 audi         a4           2.8  1999     6 auto(l5)   f        16    26
+##  6 audi         a4           2.8  1999     6 manual(m5) f        18    26
+##  7 audi         a4           3.1  2008     6 auto(av)   f        18    27
+##  8 audi         a4 quattro   1.8  1999     4 manual(m5) 4        18    26
+##  9 audi         a4 quattro   1.8  1999     4 auto(l5)   4        16    25
+## 10 audi         a4 quattro   2    2008     4 manual(m6) 4        20    28
+## 11 audi         a4 quattro   2    2008     4 auto(s6)   4        19    27
+## 12 audi         a4 quattro   2.8  1999     6 auto(l5)   4        15    25
+## 13 audi         a4 quattro   2.8  1999     6 manual(m5) 4        17    25
+## 14 audi         a4 quattro   3.1  2008     6 auto(s6)   4        17    25
+## 15 audi         a4 quattro   3.1  2008     6 manual(m6) 4        15    25
+## 16 audi         a6 quattro   2.8  1999     6 auto(l5)   4        15    24
+## 17 audi         a6 quattro   3.1  2008     6 auto(s6)   4        17    25
+## 18 audi         a6 quattro   4.2  2008     8 auto(s6)   4        16    23
+##    fl    class  
+##    &lt;chr&gt; &lt;chr&gt;  
+##  1 p     compact
+##  2 p     compact
+##  3 p     compact
+##  4 p     compact
+##  5 p     compact
+##  6 p     compact
+##  7 p     compact
+##  8 p     compact
+##  9 p     compact
+## 10 p     compact
+## 11 p     compact
+## 12 p     compact
+## 13 p     compact
+## 14 p     compact
+## 15 p     compact
+## 16 p     midsize
+## 17 p     midsize
+## 18 p     midsize</code></pre>
 <p><br></p>
 <p>「<code>manufacturer</code>が<code>&quot;audi&quot;</code>」<u><strong>でもなく</strong></u>「<code>model</code>が<code>&quot;a4&quot;</code>」<u><strong>でもない</strong></u>行を抽出したい場合は、条件を<code>!()</code>で囲めば良い。<code>!()</code>は論理値を反転させる演算子である<a href="#fn29" class="footnoteRef" id="fnref29"><sup>29</sup></a>。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mpg <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>(manufacturer <span class="op">==</span><span class="st"> &quot;audi&quot;</span> <span class="op">|</span><span class="st"> </span>model <span class="op">==</span><span class="st"> &quot;a4&quot;</span>))</code></pre></div>
 <pre><code>## # A tibble: 216 x 11
-##    manufacturer model displ  year   cyl trans drv     cty   hwy fl    class
-##    &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
-##  1 chevrolet    c150…   5.3  2008     8 auto… r        14    20 r     suv  
-##  2 chevrolet    c150…   5.3  2008     8 auto… r        11    15 e     suv  
-##  3 chevrolet    c150…   5.3  2008     8 auto… r        14    20 r     suv  
-##  4 chevrolet    c150…   5.7  1999     8 auto… r        13    17 r     suv  
-##  5 chevrolet    c150…   6    2008     8 auto… r        12    17 r     suv  
-##  6 chevrolet    corv…   5.7  1999     8 manu… r        16    26 p     2sea…
-##  7 chevrolet    corv…   5.7  1999     8 auto… r        15    23 p     2sea…
-##  8 chevrolet    corv…   6.2  2008     8 manu… r        16    26 p     2sea…
-##  9 chevrolet    corv…   6.2  2008     8 auto… r        15    25 p     2sea…
-## 10 chevrolet    corv…   7    2008     8 manu… r        15    24 p     2sea…
+##    manufacturer model              displ  year   cyl trans      drv     cty
+##    &lt;chr&gt;        &lt;chr&gt;              &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt; &lt;int&gt;
+##  1 chevrolet    c1500 suburban 2wd   5.3  2008     8 auto(l4)   r        14
+##  2 chevrolet    c1500 suburban 2wd   5.3  2008     8 auto(l4)   r        11
+##  3 chevrolet    c1500 suburban 2wd   5.3  2008     8 auto(l4)   r        14
+##  4 chevrolet    c1500 suburban 2wd   5.7  1999     8 auto(l4)   r        13
+##  5 chevrolet    c1500 suburban 2wd   6    2008     8 auto(l4)   r        12
+##  6 chevrolet    corvette             5.7  1999     8 manual(m6) r        16
+##  7 chevrolet    corvette             5.7  1999     8 auto(l4)   r        15
+##  8 chevrolet    corvette             6.2  2008     8 manual(m6) r        16
+##  9 chevrolet    corvette             6.2  2008     8 auto(s6)   r        15
+## 10 chevrolet    corvette             7    2008     8 manual(m6) r        15
+##      hwy fl    class  
+##    &lt;int&gt; &lt;chr&gt; &lt;chr&gt;  
+##  1    20 r     suv    
+##  2    15 e     suv    
+##  3    20 r     suv    
+##  4    17 r     suv    
+##  5    17 r     suv    
+##  6    26 p     2seater
+##  7    23 p     2seater
+##  8    26 p     2seater
+##  9    25 p     2seater
+## 10    24 p     2seater
 ## # … with 206 more rows</code></pre>
 </div>
 <div id="section-9.2.2" class="section level3">
@@ -384,7 +446,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 10 audi         a4 quattro   2    2008     4 manual(m6) 4    
 ## # … with 224 more rows</code></pre>
 <p><br></p>
-<p>指定した列を除外することもできる<code>select(-列名)</code>とすれば良い。</p>
+<p><code>select(-列名)</code>とすれば、指定した列を除外することもできる。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mpg <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>manufacturer) <span class="co"># manufacturerを除外</span></code></pre></div>
 <pre><code>## # A tibble: 234 x 10
@@ -411,38 +473,62 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mpg <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">one =</span> <span class="dv">1</span>) <span class="co"># 最後尾にoneという列を追加した</span></code></pre></div>
 <pre><code>## # A tibble: 234 x 12
-##    manufacturer model displ  year   cyl trans drv     cty   hwy fl    class
-##    &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
-##  1 audi         a4      1.8  1999     4 auto… f        18    29 p     comp…
-##  2 audi         a4      1.8  1999     4 manu… f        21    29 p     comp…
-##  3 audi         a4      2    2008     4 manu… f        20    31 p     comp…
-##  4 audi         a4      2    2008     4 auto… f        21    30 p     comp…
-##  5 audi         a4      2.8  1999     6 auto… f        16    26 p     comp…
-##  6 audi         a4      2.8  1999     6 manu… f        18    26 p     comp…
-##  7 audi         a4      3.1  2008     6 auto… f        18    27 p     comp…
-##  8 audi         a4 q…   1.8  1999     4 manu… 4        18    26 p     comp…
-##  9 audi         a4 q…   1.8  1999     4 auto… 4        16    25 p     comp…
-## 10 audi         a4 q…   2    2008     4 manu… 4        20    28 p     comp…
-## # … with 224 more rows, and 1 more variable: one &lt;dbl&gt;</code></pre>
+##    manufacturer model      displ  year   cyl trans      drv     cty   hwy
+##    &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt; &lt;int&gt; &lt;int&gt;
+##  1 audi         a4           1.8  1999     4 auto(l5)   f        18    29
+##  2 audi         a4           1.8  1999     4 manual(m5) f        21    29
+##  3 audi         a4           2    2008     4 manual(m6) f        20    31
+##  4 audi         a4           2    2008     4 auto(av)   f        21    30
+##  5 audi         a4           2.8  1999     6 auto(l5)   f        16    26
+##  6 audi         a4           2.8  1999     6 manual(m5) f        18    26
+##  7 audi         a4           3.1  2008     6 auto(av)   f        18    27
+##  8 audi         a4 quattro   1.8  1999     4 manual(m5) 4        18    26
+##  9 audi         a4 quattro   1.8  1999     4 auto(l5)   4        16    25
+## 10 audi         a4 quattro   2    2008     4 manual(m6) 4        20    28
+##    fl    class     one
+##    &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt;
+##  1 p     compact     1
+##  2 p     compact     1
+##  3 p     compact     1
+##  4 p     compact     1
+##  5 p     compact     1
+##  6 p     compact     1
+##  7 p     compact     1
+##  8 p     compact     1
+##  9 p     compact     1
+## 10 p     compact     1
+## # … with 224 more rows</code></pre>
 <p><br></p>
 <p>上の例では<code>one</code>という列を作り、すべての行を1で埋めたが、これはあまり実践的ではない。</p>
 <p><code>mutate()</code>が力を発揮するのは、特に<code>if_else()</code>という関数と組み合わせたときである。たとえば、<code>displ</code>（排気量）の値が3未満なら<code>good</code>、3以上なら<code>bad</code>という列（<code>engine</code>）を作りたい場合、以下のように書けば良い。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mpg <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">engine =</span> <span class="kw">if_else</span>(displ <span class="op">&lt;</span><span class="st"> </span><span class="dv">3</span>, <span class="st">&quot;good&quot;</span>, <span class="st">&quot;bad&quot;</span>))</code></pre></div>
 <pre><code>## # A tibble: 234 x 12
-##    manufacturer model displ  year   cyl trans drv     cty   hwy fl    class
-##    &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
-##  1 audi         a4      1.8  1999     4 auto… f        18    29 p     comp…
-##  2 audi         a4      1.8  1999     4 manu… f        21    29 p     comp…
-##  3 audi         a4      2    2008     4 manu… f        20    31 p     comp…
-##  4 audi         a4      2    2008     4 auto… f        21    30 p     comp…
-##  5 audi         a4      2.8  1999     6 auto… f        16    26 p     comp…
-##  6 audi         a4      2.8  1999     6 manu… f        18    26 p     comp…
-##  7 audi         a4      3.1  2008     6 auto… f        18    27 p     comp…
-##  8 audi         a4 q…   1.8  1999     4 manu… 4        18    26 p     comp…
-##  9 audi         a4 q…   1.8  1999     4 auto… 4        16    25 p     comp…
-## 10 audi         a4 q…   2    2008     4 manu… 4        20    28 p     comp…
-## # … with 224 more rows, and 1 more variable: engine &lt;chr&gt;</code></pre>
+##    manufacturer model      displ  year   cyl trans      drv     cty   hwy
+##    &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt; &lt;int&gt; &lt;int&gt;
+##  1 audi         a4           1.8  1999     4 auto(l5)   f        18    29
+##  2 audi         a4           1.8  1999     4 manual(m5) f        21    29
+##  3 audi         a4           2    2008     4 manual(m6) f        20    31
+##  4 audi         a4           2    2008     4 auto(av)   f        21    30
+##  5 audi         a4           2.8  1999     6 auto(l5)   f        16    26
+##  6 audi         a4           2.8  1999     6 manual(m5) f        18    26
+##  7 audi         a4           3.1  2008     6 auto(av)   f        18    27
+##  8 audi         a4 quattro   1.8  1999     4 manual(m5) 4        18    26
+##  9 audi         a4 quattro   1.8  1999     4 auto(l5)   4        16    25
+## 10 audi         a4 quattro   2    2008     4 manual(m6) 4        20    28
+##    fl    class   engine
+##    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; 
+##  1 p     compact good  
+##  2 p     compact good  
+##  3 p     compact good  
+##  4 p     compact good  
+##  5 p     compact good  
+##  6 p     compact good  
+##  7 p     compact bad   
+##  8 p     compact good  
+##  9 p     compact good  
+## 10 p     compact good  
+## # … with 224 more rows</code></pre>
 </div>
 <div id="section-9.3.2" class="section level3">
 <h3><span class="header-section-number">9.3.2</span> 列名を変更</h3>
@@ -450,18 +536,30 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mpg <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">rename</span>(<span class="dt">nen =</span> year) <span class="co"># yearをnenに変更</span></code></pre></div>
 <pre><code>## # A tibble: 234 x 11
-##    manufacturer model displ   nen   cyl trans drv     cty   hwy fl    class
-##    &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
-##  1 audi         a4      1.8  1999     4 auto… f        18    29 p     comp…
-##  2 audi         a4      1.8  1999     4 manu… f        21    29 p     comp…
-##  3 audi         a4      2    2008     4 manu… f        20    31 p     comp…
-##  4 audi         a4      2    2008     4 auto… f        21    30 p     comp…
-##  5 audi         a4      2.8  1999     6 auto… f        16    26 p     comp…
-##  6 audi         a4      2.8  1999     6 manu… f        18    26 p     comp…
-##  7 audi         a4      3.1  2008     6 auto… f        18    27 p     comp…
-##  8 audi         a4 q…   1.8  1999     4 manu… 4        18    26 p     comp…
-##  9 audi         a4 q…   1.8  1999     4 auto… 4        16    25 p     comp…
-## 10 audi         a4 q…   2    2008     4 manu… 4        20    28 p     comp…
+##    manufacturer model      displ   nen   cyl trans      drv     cty   hwy
+##    &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt; &lt;int&gt; &lt;int&gt;
+##  1 audi         a4           1.8  1999     4 auto(l5)   f        18    29
+##  2 audi         a4           1.8  1999     4 manual(m5) f        21    29
+##  3 audi         a4           2    2008     4 manual(m6) f        20    31
+##  4 audi         a4           2    2008     4 auto(av)   f        21    30
+##  5 audi         a4           2.8  1999     6 auto(l5)   f        16    26
+##  6 audi         a4           2.8  1999     6 manual(m5) f        18    26
+##  7 audi         a4           3.1  2008     6 auto(av)   f        18    27
+##  8 audi         a4 quattro   1.8  1999     4 manual(m5) 4        18    26
+##  9 audi         a4 quattro   1.8  1999     4 auto(l5)   4        16    25
+## 10 audi         a4 quattro   2    2008     4 manual(m6) 4        20    28
+##    fl    class  
+##    &lt;chr&gt; &lt;chr&gt;  
+##  1 p     compact
+##  2 p     compact
+##  3 p     compact
+##  4 p     compact
+##  5 p     compact
+##  6 p     compact
+##  7 p     compact
+##  8 p     compact
+##  9 p     compact
+## 10 p     compact
 ## # … with 224 more rows</code></pre>
 </div>
 </div>
@@ -500,7 +598,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>ここでは、<code>mpg</code>ではなく、架空のデータセットを作ってみよう。たとえば、以下のような状況を考えてみてほしい。</p>
 <p><br></p>
 <blockquote>
-<p>たかし君とはなこさんは、以前見たテレビドラマを思い出して「足袋を履いたときと、裸足のときとで、どっちが走るのが早くなるだろうか？」と疑問に思いました。そこで2人は、5日間のうち3日は足袋を履いて、2日は裸足で自宅から学校まで走り、到着までの所要時間を測りました。</p>
+<p>たかし君とはなこさんは、以前見たテレビドラマに感化されて、「足袋を履いたときと、裸足のときとで、どっちが走るのが早くなるだろうか？」と疑問に思いました。そこで2人は、5日間のうち3日は足袋を履いて、2日は裸足で自宅から学校まで走り、到着までの所要時間を測りました。</p>
 </blockquote>
 <p><br></p>
 <p>2人の毎日の所要時間データは<code>commute</code>というデータフレームとして保存しよう。</p>
@@ -584,8 +682,8 @@ shoes</code></pre></div>
 </div>
 <div id="section-9.6" class="section level2">
 <h2><span class="header-section-number">9.6</span> ロングフォーマット</h2>
-<p>以下の架空のデータフレーム（X, Y, Zという3つの株価の増減比の時系列データ）があるとしよう。</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1</span>)
+<p>以下の架空のデータフレーム（X, Y, Zという3つの株価の増減比の時系列データ）があったとしよう。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1</span>) <span class="co"># 乱数のシードを設定</span>
 stocks =<span class="st"> </span><span class="kw">data.frame</span>(
   <span class="dt">time =</span> <span class="kw">as.Date</span>(<span class="st">&#39;2009-01-01&#39;</span>) <span class="op">+</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">9</span>,
   <span class="dt">X =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">1</span>),
@@ -606,8 +704,8 @@ stocks</code></pre></div>
 ## 9  2009-01-09  0.5757814  1.64244239 -1.9126002
 ## 10 2009-01-10 -0.3053884  1.18780264  1.6717662</code></pre>
 <p><br></p>
-<p>このとき、3つの株価の時系列変化をプロットしてみたいが、このままではうまくいかない。なぜなら、データがロングフォーマット（列に変数名、行にデータ）という形式になっていないからである。このようなデータをワイドフォーマットと言う。</p>
-<p>データをロングフォーマットに変えるには、<code>gather()</code>を使えば良い。書き方は、<code>gather(key = &quot;新しく作るラベル&quot;, value = &quot;新しく作る数値&quot;, ロングにしたい列（複数個）)</code>である。文章ではわかりにくいと思うので、以下のコードを見てほしい。</p>
+<p>このとき、3つの株価の時系列変化をプロットしてみたいが、このままではうまくいかない。なぜなら、データがロングフォーマット（列に変数名、行にデータ）という形式になっていないからである。上の表のようなデータ形式をワイドフォーマットと言う。</p>
+<p>データをロングフォーマットに変えるには、<code>gather()</code>を使えば良い。書き方は、<code>gather(key = &quot;新しく作るラベル&quot;, value = &quot;新しく作る数値&quot;, ロングにしたい列（複数個）)</code>である。文章ではわかりにくいと思うので、以下のコードを見て、何をやっているのかを理解してほしい。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stocks_long =<span class="st"> </span>stocks <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">gather</span>(<span class="dt">key =</span> stock, <span class="dt">value =</span> price, X, Y, Z) <span class="co"># X:Zで指定してもOK</span>
 
@@ -645,7 +743,7 @@ stocks_long</code></pre></div>
 ## 30 2009-01-10     Z  1.67176624</code></pre>
 <p>ロングフォーマットにすることができた。</p>
 <hr />
-<p>元のワイドフォーマットに戻したい場合は、<code>spread()</code>を使えば良い。書き方は<code>spread(key = ワイドにする列, value = ワイドにする値)</code>である。これも文章ではわかりにくいと思うので、以下のコードを見てほしい。</p>
+<p>ロングフォーマットのデータをワイドフォーマットに戻したい場合は、<code>spread()</code>を使えば良い。書き方は<code>spread(key = ワイドにする列, value = ワイドにする値)</code>である。これも文章ではわかりにくいと思うので、以下のコードを見てほしい。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stocks_long <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">spread</span>(stock, price)</code></pre></div>
 <pre><code>##          time          X           Y          Z
@@ -667,7 +765,7 @@ stocks_long</code></pre></div>
 <p>データの読み込みについては、各人の都合があると思うので、周りの人に尋ねてみてほしい<a href="#fn30" class="footnoteRef" id="fnref30"><sup>30</sup></a>。</p>
 </div>
 <div id="ggplot2" class="section level2">
-<h2><span class="header-section-number">9.8</span> ggplot2と一緒に使う</h2>
+<h2><span class="header-section-number">9.8</span> ggplot2との併用</h2>
 <p>パイプ演算子（<code>%&gt;%</code>）を使うと、以下のようにデータハンドリングと可視化をシームレスにつなげることができる。下の例では、平均値と標準誤差をグループごとに計算し、棒グラフとエラーバーを描いている。</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mpg <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># yearごとに</span>

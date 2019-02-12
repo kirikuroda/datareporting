@@ -12,7 +12,6 @@
   gtag('config', 'UA-89644431-2');
 </script>
 
-
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>6 トレンドデータ | いつか役に立つかもしれない資料</title>
@@ -110,7 +109,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="index.html">トップページ</a></li>
+<li><a href="./">トップページ</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>はじめに（服用上の注意）</a></li>
@@ -195,7 +194,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.5" data-path="data-handling.html"><a href="data-handling.html#section-9.5"><i class="fa fa-check"></i><b>9.5</b> 結合</a></li>
 <li class="chapter" data-level="9.6" data-path="data-handling.html"><a href="data-handling.html#section-9.6"><i class="fa fa-check"></i><b>9.6</b> ロングフォーマット</a></li>
 <li class="chapter" data-level="9.7" data-path="data-handling.html"><a href="data-handling.html#section-9.7"><i class="fa fa-check"></i><b>9.7</b> データファイルの読み込み</a></li>
-<li class="chapter" data-level="9.8" data-path="introduction.html"><a href="introduction.html#ggplot2"><i class="fa fa-check"></i><b>9.8</b> ggplot2と一緒に使う</a></li>
+<li class="chapter" data-level="9.8" data-path="introduction.html"><a href="introduction.html#ggplot2"><i class="fa fa-check"></i><b>9.8</b> ggplot2との併用</a></li>
 </ul></li>
 <li class="part"><span><b>巻末資料</b></span></li>
 <li class="chapter" data-level="" data-path="e382aae383b3e383a9e382a4e383b3e8b387e69699.html"><a href="e382aae383b3e383a9e382a4e383b3e8b387e69699.html"><i class="fa fa-check"></i>オンライン資料</a></li>
@@ -320,8 +319,8 @@ Figure 6.3: <code>supp</code>ごとにグルーピングされた折れ線グラ
 </p>
 </div>
 <p><code>supp</code>ごとに<code>dose</code>と<code>mean</code>の関係をプロットすることができた。なお、<code>geom_line()</code>をグルーピングする際には、<code>group</code>に変数を指定しなければならない（指定しないとどうなるのだろうか？　気になる人は確認してみよう）。</p>
-<p>ただし、このままでは見にくいので、折れ線の色（<code>color</code>）と線種（<code>linetype</code>）にも変数を指定しよう。また、<code>geom_line()</code>の<code>size</code>で折れ線の太さを調整することができる。</p>
-<p>加えて、ドットも付け足しておこう。Chapter <a href="association.html#association">5</a>でも見たように、<code>shape</code>に変数を指定するとドットの形を変えることができる。また、<code>geom_point()</code>の<code>size</code>でドットの大きさを調整することができる。</p>
+<p>ただし、このままでは見にくいので、折れ線の色（<code>color</code>）と線種（<code>linetype</code>）にも変数を指定しよう。また、<code>geom_line()</code>の<code>size</code>で折れ線の太さを調整しよう。</p>
+<p>加えて、ドットも付け足しておこう。Chapter <a href="association.html#association">5</a>でも見たように、<code>shape</code>に変数を指定するとドットの形を変えることができる。また、<code>geom_point()</code>の<code>size</code>でドットの大きさを調整しよう。</p>
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(tg_mean, <span class="kw">aes</span>(dose, mean, <span class="dt">color =</span> supp, <span class="dt">group =</span> supp, <span class="dt">linetype =</span> supp, <span class="dt">shape =</span> supp)) <span class="op">+</span><span class="st"> </span><span class="co"># color、linetype、shape = suppを追加</span>
 <span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">size =</span> <span class="fl">1.5</span>) <span class="op">+</span><span class="st"> </span><span class="co"># sizeで太さを指定</span>

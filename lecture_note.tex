@@ -147,7 +147,9 @@
 \chapter*{RとRStudioのセットアップ}\label{rrstudio}
 \addcontentsline{toc}{chapter}{RとRStudioのセットアップ}
 
-以下の手順でセットアップしてほしい。どこかでつまずいたら、とにかく周りの人に聞いてみよう\footnote{何にでも（卒論にも）当てはまるが、自分から尋ねない限り、誰も手は差し伸べてくれないものである。逆に言えば、何か尋ねさえすれば、答えてくれない人はいないものである。}。
+以下の手順でRとRStudioをセットアップしてほしい。Rは統計ソフトウェアの本体、RStudioは「Rを使いやすくするためのソフトウェア」である。
+
+どこかでつまずいたら、とにかく周りの人に聞いてみよう\footnote{何にでも（卒論にも）当てはまるが、自分から尋ねない限り、誰も手は差し伸べてくれないものである。逆に言えば、何か尋ねさえすれば、答えてくれない人はいないものである。}。
 
 \section{Rのインストール}\label{r}
 
@@ -184,7 +186,9 @@ RとRStudioが揃っても、「パッケージ」というものがないと話
 
 \section{どうやってRのコードを実行するか？}\label{r}
 
-文章化するのが予想以上に面倒だったので、説明は他に譲る（\ldots{}\ldots{}）。たとえば、\url{https://kazutan.github.io/JSSP2018_spring/intro_rstudio.html}
+R自体を立ち上げる必要はなく、RStudioを立ち上げれば本資料のコードを実行することができる。
+
+具体的な操作方法については、文章化するのが予想以上に面倒だったので、説明は他に譲る（\ldots{}\ldots{}）。たとえば、\url{https://kazutan.github.io/JSSP2018_spring/intro_rstudio.html}
 が参考になるだろう。個人的には、R
 Markdownという記法がレポーティングに最適だと思うが、現時点では気になる人だけ調べれば良いと思う。
 
@@ -301,7 +305,7 @@ IV
 
 ということである。少し乱暴にまとめてしまうと、\textbf{グラフとは変数の分布や関係を可視化したもの}にほかならない。
 
-「ひと目でわかる」という点も重要である。もし発表者が表や統計量だけを見せ、それをもとに議論を始めたら、あなたはどのように感じるだろうか？　数字ばかり見せられた聴衆は大体話をフォローできなくなるし、そもそも最初から聞く耳を持たなくなってしまう場合もある。\textbf{ヒトの認知資源には限りがあるし、わかりにくい話にずっと耳を貸していられるほど人々は親切でもない}と思っておいたほうが賢明だろう。
+「ひと目でわかる」という点も重要である。もし発表者が表や統計量だけを見せ、それをもとに議論を始めたら、あなたはどのように感じるだろうか？　数字ばかり見せられた聴衆は話をフォローできなくなるし、そもそも最初から聞く耳を持たなくなってしまう場合もある。\textbf{ヒトの認知資源には限りがあるし、わかりにくい話にずっと耳を貸していられるほど人々は親切でもない}と思っておいたほうが賢明だろう。
 
 とにかく、まずは黙って\textbf{「可視化からはじめよ」}を肝に銘じてほしい。
 
@@ -491,7 +495,7 @@ x, yは省略する）。
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(mtcars, }\KeywordTok{aes}\NormalTok{(disp, mpg, }\DataTypeTok{color =}\NormalTok{ cyl)) }\OperatorTok{+}\StringTok{ }\CommentTok{# color = year を追加}
+\KeywordTok{ggplot}\NormalTok{(mtcars, }\KeywordTok{aes}\NormalTok{(disp, mpg, }\DataTypeTok{color =}\NormalTok{ cyl)) }\OperatorTok{+}\StringTok{ }\CommentTok{# color = cyl を追加}
 \StringTok{  }\KeywordTok{geom_point}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -513,7 +517,7 @@ x, yは省略する）。
 
 図の右側の青いバー（\textbf{凡例}；legend）を見ると、その横にシリンダーの個数が連続変数として1刻みで描かれれている（4,5,6,7,8）。しかし、実際のデータには4,6,8という3種類の値しかない。もちろん個数は連続的なものだが、この場合は\textbf{離散変数}（discrete
 variable；質的変数、qualitative/categorical/factor
-variableとも言う）として扱ったほうがデータの表現として妥当だろう\footnote{変数が連続か離散かという区別は、可視化の上で結構重要なので意識しておくと良い。}。
+variableとも言う）として扱ったほうがデータの表現として妥当だし、見やすくなるだろう\footnote{変数が連続か離散かという区別は、可視化の上で結構重要なので意識しておくと良い。}。
 
 この場合、\texttt{cyl}を\texttt{factor()}でくくると解決する。
 
@@ -664,7 +668,7 @@ graph; bar chart; bar plot）だろう。
   \texttt{weight}：植物の重さの平均値
 \end{itemize}
 
-を表している。素朴に思いつくのは、「条件をx軸に、重さをy軸に取った棒グラフ」だろう。数量を表す棒グラフは、\texttt{geom\_bar()}をで描くことができる。
+を表している。素朴に思いつくのは、「条件をx軸に、重さをy軸に取った棒グラフ」だろう。数量を表す棒グラフは、\texttt{geom\_bar()}で描くことができる。
 
 
 
@@ -686,7 +690,7 @@ graph; bar chart; bar plot）だろう。
 
 なお、データの数値を棒グラフで描く際は、\texttt{stat\ =\ "identity"}と設定する必要がある。なぜなら、\texttt{geom\_bar()}は、データの\textbf{個数}を描くのがデフォルト（\texttt{stat\ =\ "count"}という設定）になっているからである\footnote{ここら辺のことはいずれわかるようになるので、今はそういうものだと飲み込んでほしい。いずれ勝手に理解できているはず（たぶん）。}。
 
-気になる人は、\texttt{stat\ =\ "identity"}の部分を消してコードを実行してみよう。\texttt{エラー:\ stat\_count()\ must\ not\ be\ used\ with\ a\ y\ aesthetic.}というエラーメッセージが出て、プロットできないはずである\footnote{本資料のコードを修正した上で実行してもPCが壊れたりすることはないので、「ここをこうしたらどうなるだろうか？」と積極的にいじってみることを推奨する。}。
+気になる人は、\texttt{stat\ =\ "identity"}の部分を消してコードを実行してみよう。\texttt{エラー:\ stat\_count()\ must\ not\ be\ used\ with\ a\ y\ aesthetic.}というメッセージが出てきて、プロットできないはずである\footnote{本資料のコードを修正した上で実行してもPCが壊れたりすることはないので、「ここをこうしたらどうなるだろうか？」と積極的にいじってみることを推奨する。}。
 
 \subsection{グルーピングされた棒グラフ}
 
@@ -924,7 +928,7 @@ plot）というものがある。ドットプロットというくらいなの�
   \item
     データをドットで表現するための関数。
   \item
-    ちなみに、\texttt{geom\_point()}では\texttt{stat\ =\ "identity"}がデフォルトなので、\texttt{geom\_bar()}とは異なり、\texttt{stat}の中身を明示的に指定する必要がない。
+    ちなみに、\texttt{geom\_point()}では\texttt{stat\ =\ "identity"}がデフォルトである。そのため\texttt{geom\_bar()}とは異なり、\texttt{stat}の中身を明示的に指定する必要がない。
   \end{itemize}
 \end{enumerate}
 
@@ -1000,7 +1004,7 @@ statisticsとも言う）だけに注目して、\textbf{分布}（distribution�
 ## 6 170 31  1 27 108  5  1  57  57  14   3  0  8   18 0.3314
 \end{verbatim}
 
-では、144名の打手の打率（\texttt{avg}）の分布を可視化してみよう。ヒストグラムはx軸に（連続）変数の値を取るグラフなので、以下のようにコードを書けば良い。
+では、144名の打手の打率（\texttt{avg}）の分布を可視化してみよう。ヒストグラムはx軸に連続変数の値を取るグラフなので、以下のようにコードを書けば良い。
 
 
 
@@ -1571,7 +1575,7 @@ Chapter
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(mtcars, }\KeywordTok{aes}\NormalTok{(disp, mpg, }\DataTypeTok{color =} \KeywordTok{factor}\NormalTok{(cyl), }\DataTypeTok{shape =} \KeywordTok{factor}\NormalTok{(cyl))) }\OperatorTok{+}\StringTok{ }\CommentTok{# shape = factor(year)を追加}
+\KeywordTok{ggplot}\NormalTok{(mtcars, }\KeywordTok{aes}\NormalTok{(disp, mpg, }\DataTypeTok{color =} \KeywordTok{factor}\NormalTok{(cyl), }\DataTypeTok{shape =} \KeywordTok{factor}\NormalTok{(cyl))) }\OperatorTok{+}\StringTok{ }\CommentTok{# shape = factor(cyl)を追加}
 \StringTok{  }\KeywordTok{geom_point}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
@@ -1657,14 +1661,22 @@ Chapter
 
 \begin{verbatim}
 ## # A tibble: 6 x 11
-##   manufacturer model displ  year   cyl trans  drv     cty   hwy fl    class
-##   <chr>        <chr> <dbl> <int> <int> <chr>  <chr> <int> <int> <chr> <chr>
-## 1 audi         a4      1.8  1999     4 auto(~ f        18    29 p     comp~
-## 2 audi         a4      1.8  1999     4 manua~ f        21    29 p     comp~
-## 3 audi         a4      2    2008     4 manua~ f        20    31 p     comp~
-## 4 audi         a4      2    2008     4 auto(~ f        21    30 p     comp~
-## 5 audi         a4      2.8  1999     6 auto(~ f        16    26 p     comp~
-## 6 audi         a4      2.8  1999     6 manua~ f        18    26 p     comp~
+##   manufacturer model displ  year   cyl trans      drv     cty   hwy fl   
+##   <chr>        <chr> <dbl> <int> <int> <chr>      <chr> <int> <int> <chr>
+## 1 audi         a4      1.8  1999     4 auto(l5)   f        18    29 p    
+## 2 audi         a4      1.8  1999     4 manual(m5) f        21    29 p    
+## 3 audi         a4      2    2008     4 manual(m6) f        20    31 p    
+## 4 audi         a4      2    2008     4 auto(av)   f        21    30 p    
+## 5 audi         a4      2.8  1999     6 auto(l5)   f        16    26 p    
+## 6 audi         a4      2.8  1999     6 manual(m5) f        18    26 p    
+##   class  
+##   <chr>  
+## 1 compact
+## 2 compact
+## 3 compact
+## 4 compact
+## 5 compact
+## 6 compact
 \end{verbatim}
 
 注目する変数は、
@@ -1678,7 +1690,7 @@ Chapter
   \texttt{cyl}：シリンダー数（4, 5, 6, or 8）
 \end{itemize}
 
-の2つである。早速、\texttt{x}に\texttt{displ}、\texttt{y}に\texttt{hwy}、\texttt{color}に\texttt{factor(cyl)}を指定して散布図を描いてみよう。
+の3つである。早速、\texttt{x}に\texttt{displ}、\texttt{y}に\texttt{hwy}、\texttt{color}に\texttt{factor(cyl)}を指定して散布図を描いてみよう。
 
 
 
@@ -1970,10 +1982,10 @@ oxygen demand; BOD）とは水質指標のことである\footnote{\url{https://
 
 \texttt{supp}ごとに\texttt{dose}と\texttt{mean}の関係をプロットすることができた。なお、\texttt{geom\_line()}をグルーピングする際には、\texttt{group}に変数を指定しなければならない（指定しないとどうなるのだろうか？　気になる人は確認してみよう）。
 
-ただし、このままでは見にくいので、折れ線の色（\texttt{color}）と線種（\texttt{linetype}）にも変数を指定しよう。また、\texttt{geom\_line()}の\texttt{size}で折れ線の太さを調整することができる。
+ただし、このままでは見にくいので、折れ線の色（\texttt{color}）と線種（\texttt{linetype}）にも変数を指定しよう。また、\texttt{geom\_line()}の\texttt{size}で折れ線の太さを調整しよう。
 
 加えて、ドットも付け足しておこう。Chapter
-\ref{association}でも見たように、\texttt{shape}に変数を指定するとドットの形を変えることができる。また、\texttt{geom\_point()}の\texttt{size}でドットの大きさを調整することができる。
+\ref{association}でも見たように、\texttt{shape}に変数を指定するとドットの形を変えることができる。また、\texttt{geom\_point()}の\texttt{size}でドットの大きさを調整しよう。
 
 
 
@@ -2162,7 +2174,7 @@ error of the mean; \emph{SEM}\footnote{構造方程式モデリング（structur
 
   \begin{itemize}
   \item
-    エラーバー。\texttt{ymin}と\texttt{ymax}には、それぞれエラーバーの上端と下端のy座標を指定する。
+    エラーバー。\texttt{ymin}と\texttt{ymax}には、それぞれエラーバーの下端と上端のy座標を指定する。
   \item
     \texttt{position\ =\ position\_dodge(width\ =\ 0.9)}とすることで、エラーバーを棒グラフのように水平方向にずらすことができる。棒グラフのずらし幅が0.9なので、エラーバーの\texttt{width}（ずらし幅）も0.9にする\footnote{ちなみに、今まで出てきた\texttt{position\ =\ "dodge"}は\texttt{position\ =\ position\_dodge()}の省略版である。}。
   \item
@@ -2307,6 +2319,8 @@ model）を表している。
 \caption{(ref:smooth-plot-2)}\label{fig:unnamed-chunk-85}
 \end{figure}
 
+もちろん、線形モデル以外のフィッティングも可能である。詳しくはGoogle先生が教えてくれるだろう。
+
 \section{練習問題}\label{-4}
 
 \begin{itemize}
@@ -2333,7 +2347,7 @@ ggplot2はデフォルトでも十分見栄えの良いグラフを出力して�
 \ref{fig:dot-plot}
 のClevelandのドットプロットのように\texttt{x}と\texttt{y}の変数を逆にしても良いが、ggplot2の設計上それではうまくいかない場合もある。
 
-そのようなときは\texttt{coord\_flip()}が使えば良い。これは文字通り、座標（coordination）と反転（flip）させるための関数である。
+そのようなときは\texttt{coord\_flip()}を使えば良い。これは文字通り、座標（coordination）と反転（flip）させるための関数である。
 
 たとえば、Figure
 \ref{fig:bar-plot-3}で\texttt{diamonds}データ（\texttt{cut}ごとのダイアモンドの個数）をプロットしたが、これに\texttt{coord\_flip()}を付け足すと以下のようになる。
@@ -2493,7 +2507,7 @@ multipleは\texttt{facet\_grid()}もしくは\texttt{facet\_wrap()}で作るこ�
 \begin{Highlighting}[]
 \KeywordTok{ggplot}\NormalTok{(mtcars, }\KeywordTok{aes}\NormalTok{(wt, mpg, }\DataTypeTok{color =} \KeywordTok{factor}\NormalTok{(cyl))) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}
-\StringTok{  }\KeywordTok{scale_color_manual}\NormalTok{(}\DataTypeTok{values =} \KeywordTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{,}\StringTok{"blue"}\NormalTok{,}\StringTok{"green"}\NormalTok{))}
+\StringTok{  }\KeywordTok{scale_color_manual}\NormalTok{(}\DataTypeTok{values =} \KeywordTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{,}\StringTok{"blue"}\NormalTok{,}\StringTok{"green"}\NormalTok{)) }\CommentTok{# 色をマニュアルで指定}
 \end{Highlighting}
 \end{Shaded}
 
@@ -2512,7 +2526,7 @@ ggplot2には、他にも色や見た目を調整するための様々な関数�
 
 デフォルトの設定だと、変数名がそのまま軸のラベルになってしまう。データを探索的に分析（\textbf{data
 exploration}）している最中はそれで問題ないかもしれない。しかし、内容を他の人と共有（\textbf{data
-presentation}）したい場合は、なるべくわかりやすくするため、軸名を変えなくてはならないだろう\footnote{気配りと言うほどのものでもないが、こういうことをやるかやらないかで、ゼミメンバーや聴衆が自分の話を聞く態度は変わってくるだろう（たぶん）。}。
+presentation}）したい場合は、なるべくわかりやすくするため、軸名を変えるなどの調整が必要になるだろう\footnote{気配りと言うほどのものでもないが、こういうことをやるかやらないかで、ゼミメンバーや聴衆が自分の話を聞く態度は変わってくるだろう（たぶん）。}。
 
 グラフの軸ラベルは\texttt{labs()}という関数で一括変更することができる。なお、下では具体例として\texttt{Title}や\texttt{Subtitle}なども指定しているが、実用上はごちゃごちゃしてしまうだけなので、基本的には指定しなくても良い。
 
@@ -2543,7 +2557,7 @@ presentation}）したい場合は、なるべくわかりやすくするため�
 
 \section{凡例}
 
-ここでは、凡例を「消す」方法を解説する。なぜなら、凡例がなくとも自明な場合も多いからである。下の図はFigure
+ここでは、凡例を「消す」方法を解説する。なぜなら、グラフに凡例がなくとも自明な場合も多いからである。下の図はFigure
 \ref{fig:boxplot-1}の凡例を消したグラフである。
 
 
@@ -2624,7 +2638,7 @@ patchworkを使うと、たとえば下のように、複数のパネルを直�
 \end{Highlighting}
 \end{Shaded}
 
-なお、余程のことがない限り、グラフは基本的にPDF形式で保存するのが良い\footnote{PDF形式で保存する場合、色々面倒なことが起こるかもしれないが、そこら辺はググって解決しよう。}。なぜPDFが良いのかはGoogleが教えてくれるだろう。
+なお、余程のことがない限り、グラフは基本的にPDF形式で保存するのが良い\footnote{PDF形式で保存する場合、色々面倒なことが起こるかもしれないが、そこら辺はググって解決しよう。}。なぜPDFが良いのかはGoogle先生が教えてくれるだろう。
 
 \section{練習問題}\label{-5}
 
@@ -2639,7 +2653,7 @@ patchworkを使うと、たとえば下のように、複数のパネルを直�
 
 \chapter{データハンドリング}\label{data-handling}
 
-ここまで、ggplot2を使ったデータの可視化を見てきた。ただし、ggplot2で作図をする際、大きな前提条件がある。それは、\textbf{データを行列の形で用意しなければいけない}というものである。つまり、変数を列に、観測値を行に取るようなデータ構造にあらかじめ整形しなければならないということである。
+ここまで、ggplot2を使ったデータの可視化を見てきた。ただし、ggplot2で作図をする際、大きな前提条件がある。それは、\textbf{データを行列（データフレームもしくはtibbleと呼ばれる形式）で用意しなければいけない}というものである。つまり、変数を列に、観測値を行に取るようなデータ構造にあらかじめ整形しなければならないということである。
 
 たとえば、今まで使ってきた\texttt{mtcars}、\texttt{faithful}のデータ構造を改めて見てみよう。
 
@@ -2675,7 +2689,7 @@ patchworkを使うと、たとえば下のように、複数のパネルを直�
 ## 6     2.883      55
 \end{verbatim}
 
-どちらも、列に変数名、行に観測値という構造をもっている。
+どちらも、列に変数名、行に観測値という構造になっている。
 
 \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
 
@@ -2685,14 +2699,14 @@ patchworkを使うと、たとえば下のように、複数のパネルを直�
 
 \begin{itemize}
 \item
-  1つのグループのデータだけを抽出した上でプロットしたい（たとえば、3条件のうち統制条件だけプロットしたい、など）
+  \textbf{1つのグループのデータだけを抽出した上でプロットしたい}（たとえば、3条件のうち統制条件だけプロットしたい、など）
 \item
-  素値ではなく、平均値や標準誤差などの統計量をプロットしたい
+  \textbf{素値ではなく、平均値や標準誤差などの統計量をプロットしたい}
 \item
-  2つ以上のデータフレームを結合してプロットしたい
+  \textbf{2つ以上のデータフレームを結合してプロットしたい}
 \end{itemize}
 
-などである。これらの問題は、いずれもtidyverseと呼ばれるパッケージ群を使えば解決する。
+などである。これらの問題は、いずれも\textbf{tidyverse}と呼ばれるパッケージ群を使えば解決する。
 
 \section{tidyverse}\label{tidyverse}
 
@@ -2710,7 +2724,7 @@ patchworkを使うと、たとえば下のように、複数のパネルを直�
 
 \subsection{データの値で絞り込み}
 
-データの値によって絞り込みを行いたい時がある。たとえば、\texttt{mpg}であれば、\texttt{manufacturer}の種類でデータを絞り込みたい（データの行単位で抽出したい）ということである。実際の実験データで言えば、男性／女性のデータのみ抽出したいというような場面である。
+データの値によって絞り込みを行いたい時がある。たとえば、\texttt{mpg}であれば、\texttt{manufacturer}の種類でデータを絞り込みたい（データの行単位で抽出したい）ということである。心理学の実験データで言えば、男性／女性のデータのみ抽出したいというような場面を想像してみてほしい。
 
 このようなときは、\texttt{filter(抽出条件)}を使えば良い。
 
@@ -2723,31 +2737,51 @@ patchworkを使うと、たとえば下のように、複数のパネルを直�
 
 \begin{verbatim}
 ## # A tibble: 18 x 11
-##    manufacturer model displ  year   cyl trans drv     cty   hwy fl    class
-##    <chr>        <chr> <dbl> <int> <int> <chr> <chr> <int> <int> <chr> <chr>
-##  1 audi         a4      1.8  1999     4 auto~ f        18    29 p     comp~
-##  2 audi         a4      1.8  1999     4 manu~ f        21    29 p     comp~
-##  3 audi         a4      2    2008     4 manu~ f        20    31 p     comp~
-##  4 audi         a4      2    2008     4 auto~ f        21    30 p     comp~
-##  5 audi         a4      2.8  1999     6 auto~ f        16    26 p     comp~
-##  6 audi         a4      2.8  1999     6 manu~ f        18    26 p     comp~
-##  7 audi         a4      3.1  2008     6 auto~ f        18    27 p     comp~
-##  8 audi         a4 q~   1.8  1999     4 manu~ 4        18    26 p     comp~
-##  9 audi         a4 q~   1.8  1999     4 auto~ 4        16    25 p     comp~
-## 10 audi         a4 q~   2    2008     4 manu~ 4        20    28 p     comp~
-## 11 audi         a4 q~   2    2008     4 auto~ 4        19    27 p     comp~
-## 12 audi         a4 q~   2.8  1999     6 auto~ 4        15    25 p     comp~
-## 13 audi         a4 q~   2.8  1999     6 manu~ 4        17    25 p     comp~
-## 14 audi         a4 q~   3.1  2008     6 auto~ 4        17    25 p     comp~
-## 15 audi         a4 q~   3.1  2008     6 manu~ 4        15    25 p     comp~
-## 16 audi         a6 q~   2.8  1999     6 auto~ 4        15    24 p     mids~
-## 17 audi         a6 q~   3.1  2008     6 auto~ 4        17    25 p     mids~
-## 18 audi         a6 q~   4.2  2008     8 auto~ 4        16    23 p     mids~
+##    manufacturer model      displ  year   cyl trans      drv     cty   hwy
+##    <chr>        <chr>      <dbl> <int> <int> <chr>      <chr> <int> <int>
+##  1 audi         a4           1.8  1999     4 auto(l5)   f        18    29
+##  2 audi         a4           1.8  1999     4 manual(m5) f        21    29
+##  3 audi         a4           2    2008     4 manual(m6) f        20    31
+##  4 audi         a4           2    2008     4 auto(av)   f        21    30
+##  5 audi         a4           2.8  1999     6 auto(l5)   f        16    26
+##  6 audi         a4           2.8  1999     6 manual(m5) f        18    26
+##  7 audi         a4           3.1  2008     6 auto(av)   f        18    27
+##  8 audi         a4 quattro   1.8  1999     4 manual(m5) 4        18    26
+##  9 audi         a4 quattro   1.8  1999     4 auto(l5)   4        16    25
+## 10 audi         a4 quattro   2    2008     4 manual(m6) 4        20    28
+## 11 audi         a4 quattro   2    2008     4 auto(s6)   4        19    27
+## 12 audi         a4 quattro   2.8  1999     6 auto(l5)   4        15    25
+## 13 audi         a4 quattro   2.8  1999     6 manual(m5) 4        17    25
+## 14 audi         a4 quattro   3.1  2008     6 auto(s6)   4        17    25
+## 15 audi         a4 quattro   3.1  2008     6 manual(m6) 4        15    25
+## 16 audi         a6 quattro   2.8  1999     6 auto(l5)   4        15    24
+## 17 audi         a6 quattro   3.1  2008     6 auto(s6)   4        17    25
+## 18 audi         a6 quattro   4.2  2008     8 auto(s6)   4        16    23
+##    fl    class  
+##    <chr> <chr>  
+##  1 p     compact
+##  2 p     compact
+##  3 p     compact
+##  4 p     compact
+##  5 p     compact
+##  6 p     compact
+##  7 p     compact
+##  8 p     compact
+##  9 p     compact
+## 10 p     compact
+## 11 p     compact
+## 12 p     compact
+## 13 p     compact
+## 14 p     compact
+## 15 p     compact
+## 16 p     midsize
+## 17 p     midsize
+## 18 p     midsize
 \end{verbatim}
 
-ここで、\texttt{==}は「等しい」ということを意味している。大体のプログラミング言語では、\texttt{==}が「等しい」\texttt{=}が「代入する」を意味するものである。
+ここで、\texttt{==}は「等しい」ということを意味している。大体のプログラミング言語では、\texttt{==}は「等しい」を、\texttt{=}は「代入する」を意味することに注意しよう。
 
-ちなみに、\texttt{\%\textgreater{}\%}はパイプ演算子と呼ばれており、オブジェクトを次の関数の第一引数に突っ込むという操作を表している。ちょっと何を言っているのか分からないと思うが、あまり気にしなくて良い。何をやっているのか、少なくとも直観的には分かるだろう。今はそれで大丈夫である。
+ちなみに、\texttt{\%\textgreater{}\%}はパイプ演算子と呼ばれており、オブジェクトを次の関数の第一引数に突っ込むという操作を表している。ちょっと何を言っているのか分からないと思うが、あまり気にしなくて良い。上のコードで何がおこなわれているのか、少なくとも直観的には分かるだろう。今はそれで大丈夫である。
 
 \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
 
@@ -2762,15 +2796,24 @@ patchworkを使うと、たとえば下のように、複数のパネルを直�
 
 \begin{verbatim}
 ## # A tibble: 7 x 11
-##   manufacturer model displ  year   cyl trans  drv     cty   hwy fl    class
-##   <chr>        <chr> <dbl> <int> <int> <chr>  <chr> <int> <int> <chr> <chr>
-## 1 audi         a4      1.8  1999     4 auto(~ f        18    29 p     comp~
-## 2 audi         a4      1.8  1999     4 manua~ f        21    29 p     comp~
-## 3 audi         a4      2    2008     4 manua~ f        20    31 p     comp~
-## 4 audi         a4      2    2008     4 auto(~ f        21    30 p     comp~
-## 5 audi         a4      2.8  1999     6 auto(~ f        16    26 p     comp~
-## 6 audi         a4      2.8  1999     6 manua~ f        18    26 p     comp~
-## 7 audi         a4      3.1  2008     6 auto(~ f        18    27 p     comp~
+##   manufacturer model displ  year   cyl trans      drv     cty   hwy fl   
+##   <chr>        <chr> <dbl> <int> <int> <chr>      <chr> <int> <int> <chr>
+## 1 audi         a4      1.8  1999     4 auto(l5)   f        18    29 p    
+## 2 audi         a4      1.8  1999     4 manual(m5) f        21    29 p    
+## 3 audi         a4      2    2008     4 manual(m6) f        20    31 p    
+## 4 audi         a4      2    2008     4 auto(av)   f        21    30 p    
+## 5 audi         a4      2.8  1999     6 auto(l5)   f        16    26 p    
+## 6 audi         a4      2.8  1999     6 manual(m5) f        18    26 p    
+## 7 audi         a4      3.1  2008     6 auto(av)   f        18    27 p    
+##   class  
+##   <chr>  
+## 1 compact
+## 2 compact
+## 3 compact
+## 4 compact
+## 5 compact
+## 6 compact
+## 7 compact
 \end{verbatim}
 
 「\texttt{manufacturer}が\texttt{"audi"}」\textbf{または}「\texttt{model}が\texttt{"a4"}」の行を抽出したい場合は、条件を\texttt{\textbar{}}で繋げば良い。
@@ -2784,26 +2827,46 @@ patchworkを使うと、たとえば下のように、複数のパネルを直�
 
 \begin{verbatim}
 ## # A tibble: 18 x 11
-##    manufacturer model displ  year   cyl trans drv     cty   hwy fl    class
-##    <chr>        <chr> <dbl> <int> <int> <chr> <chr> <int> <int> <chr> <chr>
-##  1 audi         a4      1.8  1999     4 auto~ f        18    29 p     comp~
-##  2 audi         a4      1.8  1999     4 manu~ f        21    29 p     comp~
-##  3 audi         a4      2    2008     4 manu~ f        20    31 p     comp~
-##  4 audi         a4      2    2008     4 auto~ f        21    30 p     comp~
-##  5 audi         a4      2.8  1999     6 auto~ f        16    26 p     comp~
-##  6 audi         a4      2.8  1999     6 manu~ f        18    26 p     comp~
-##  7 audi         a4      3.1  2008     6 auto~ f        18    27 p     comp~
-##  8 audi         a4 q~   1.8  1999     4 manu~ 4        18    26 p     comp~
-##  9 audi         a4 q~   1.8  1999     4 auto~ 4        16    25 p     comp~
-## 10 audi         a4 q~   2    2008     4 manu~ 4        20    28 p     comp~
-## 11 audi         a4 q~   2    2008     4 auto~ 4        19    27 p     comp~
-## 12 audi         a4 q~   2.8  1999     6 auto~ 4        15    25 p     comp~
-## 13 audi         a4 q~   2.8  1999     6 manu~ 4        17    25 p     comp~
-## 14 audi         a4 q~   3.1  2008     6 auto~ 4        17    25 p     comp~
-## 15 audi         a4 q~   3.1  2008     6 manu~ 4        15    25 p     comp~
-## 16 audi         a6 q~   2.8  1999     6 auto~ 4        15    24 p     mids~
-## 17 audi         a6 q~   3.1  2008     6 auto~ 4        17    25 p     mids~
-## 18 audi         a6 q~   4.2  2008     8 auto~ 4        16    23 p     mids~
+##    manufacturer model      displ  year   cyl trans      drv     cty   hwy
+##    <chr>        <chr>      <dbl> <int> <int> <chr>      <chr> <int> <int>
+##  1 audi         a4           1.8  1999     4 auto(l5)   f        18    29
+##  2 audi         a4           1.8  1999     4 manual(m5) f        21    29
+##  3 audi         a4           2    2008     4 manual(m6) f        20    31
+##  4 audi         a4           2    2008     4 auto(av)   f        21    30
+##  5 audi         a4           2.8  1999     6 auto(l5)   f        16    26
+##  6 audi         a4           2.8  1999     6 manual(m5) f        18    26
+##  7 audi         a4           3.1  2008     6 auto(av)   f        18    27
+##  8 audi         a4 quattro   1.8  1999     4 manual(m5) 4        18    26
+##  9 audi         a4 quattro   1.8  1999     4 auto(l5)   4        16    25
+## 10 audi         a4 quattro   2    2008     4 manual(m6) 4        20    28
+## 11 audi         a4 quattro   2    2008     4 auto(s6)   4        19    27
+## 12 audi         a4 quattro   2.8  1999     6 auto(l5)   4        15    25
+## 13 audi         a4 quattro   2.8  1999     6 manual(m5) 4        17    25
+## 14 audi         a4 quattro   3.1  2008     6 auto(s6)   4        17    25
+## 15 audi         a4 quattro   3.1  2008     6 manual(m6) 4        15    25
+## 16 audi         a6 quattro   2.8  1999     6 auto(l5)   4        15    24
+## 17 audi         a6 quattro   3.1  2008     6 auto(s6)   4        17    25
+## 18 audi         a6 quattro   4.2  2008     8 auto(s6)   4        16    23
+##    fl    class  
+##    <chr> <chr>  
+##  1 p     compact
+##  2 p     compact
+##  3 p     compact
+##  4 p     compact
+##  5 p     compact
+##  6 p     compact
+##  7 p     compact
+##  8 p     compact
+##  9 p     compact
+## 10 p     compact
+## 11 p     compact
+## 12 p     compact
+## 13 p     compact
+## 14 p     compact
+## 15 p     compact
+## 16 p     midsize
+## 17 p     midsize
+## 18 p     midsize
 \end{verbatim}
 
 「\texttt{manufacturer}が\texttt{"audi"}」\textbf{でもなく}「\texttt{model}が\texttt{"a4"}」\textbf{でもない}行を抽出したい場合は、条件を\texttt{!()}で囲めば良い。\texttt{!()}は論理値を反転させる演算子である\footnote{ちなみに「\texttt{manufacturer}が\texttt{"audi"}ではない」を書きたいときは、\texttt{manufacturer\ !=\ "audi"}とすれば良い。}。
@@ -2817,18 +2880,30 @@ patchworkを使うと、たとえば下のように、複数のパネルを直�
 
 \begin{verbatim}
 ## # A tibble: 216 x 11
-##    manufacturer model displ  year   cyl trans drv     cty   hwy fl    class
-##    <chr>        <chr> <dbl> <int> <int> <chr> <chr> <int> <int> <chr> <chr>
-##  1 chevrolet    c150~   5.3  2008     8 auto~ r        14    20 r     suv  
-##  2 chevrolet    c150~   5.3  2008     8 auto~ r        11    15 e     suv  
-##  3 chevrolet    c150~   5.3  2008     8 auto~ r        14    20 r     suv  
-##  4 chevrolet    c150~   5.7  1999     8 auto~ r        13    17 r     suv  
-##  5 chevrolet    c150~   6    2008     8 auto~ r        12    17 r     suv  
-##  6 chevrolet    corv~   5.7  1999     8 manu~ r        16    26 p     2sea~
-##  7 chevrolet    corv~   5.7  1999     8 auto~ r        15    23 p     2sea~
-##  8 chevrolet    corv~   6.2  2008     8 manu~ r        16    26 p     2sea~
-##  9 chevrolet    corv~   6.2  2008     8 auto~ r        15    25 p     2sea~
-## 10 chevrolet    corv~   7    2008     8 manu~ r        15    24 p     2sea~
+##    manufacturer model              displ  year   cyl trans      drv     cty
+##    <chr>        <chr>              <dbl> <int> <int> <chr>      <chr> <int>
+##  1 chevrolet    c1500 suburban 2wd   5.3  2008     8 auto(l4)   r        14
+##  2 chevrolet    c1500 suburban 2wd   5.3  2008     8 auto(l4)   r        11
+##  3 chevrolet    c1500 suburban 2wd   5.3  2008     8 auto(l4)   r        14
+##  4 chevrolet    c1500 suburban 2wd   5.7  1999     8 auto(l4)   r        13
+##  5 chevrolet    c1500 suburban 2wd   6    2008     8 auto(l4)   r        12
+##  6 chevrolet    corvette             5.7  1999     8 manual(m6) r        16
+##  7 chevrolet    corvette             5.7  1999     8 auto(l4)   r        15
+##  8 chevrolet    corvette             6.2  2008     8 manual(m6) r        16
+##  9 chevrolet    corvette             6.2  2008     8 auto(s6)   r        15
+## 10 chevrolet    corvette             7    2008     8 manual(m6) r        15
+##      hwy fl    class  
+##    <int> <chr> <chr>  
+##  1    20 r     suv    
+##  2    15 e     suv    
+##  3    20 r     suv    
+##  4    17 r     suv    
+##  5    17 r     suv    
+##  6    26 p     2seater
+##  7    23 p     2seater
+##  8    26 p     2seater
+##  9    25 p     2seater
+## 10    24 p     2seater
 ## # ... with 206 more rows
 \end{verbatim}
 
@@ -2888,7 +2963,7 @@ patchworkを使うと、たとえば下のように、複数のパネルを直�
 ## # ... with 224 more rows
 \end{verbatim}
 
-指定した列を除外することもできる\texttt{select(-列名)}とすれば良い。
+\texttt{select(-列名)}とすれば、指定した列を除外することもできる。
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2929,19 +3004,31 @@ patchworkを使うと、たとえば下のように、複数のパネルを直�
 
 \begin{verbatim}
 ## # A tibble: 234 x 12
-##    manufacturer model displ  year   cyl trans drv     cty   hwy fl    class
-##    <chr>        <chr> <dbl> <int> <int> <chr> <chr> <int> <int> <chr> <chr>
-##  1 audi         a4      1.8  1999     4 auto~ f        18    29 p     comp~
-##  2 audi         a4      1.8  1999     4 manu~ f        21    29 p     comp~
-##  3 audi         a4      2    2008     4 manu~ f        20    31 p     comp~
-##  4 audi         a4      2    2008     4 auto~ f        21    30 p     comp~
-##  5 audi         a4      2.8  1999     6 auto~ f        16    26 p     comp~
-##  6 audi         a4      2.8  1999     6 manu~ f        18    26 p     comp~
-##  7 audi         a4      3.1  2008     6 auto~ f        18    27 p     comp~
-##  8 audi         a4 q~   1.8  1999     4 manu~ 4        18    26 p     comp~
-##  9 audi         a4 q~   1.8  1999     4 auto~ 4        16    25 p     comp~
-## 10 audi         a4 q~   2    2008     4 manu~ 4        20    28 p     comp~
-## # ... with 224 more rows, and 1 more variable: one <dbl>
+##    manufacturer model      displ  year   cyl trans      drv     cty   hwy
+##    <chr>        <chr>      <dbl> <int> <int> <chr>      <chr> <int> <int>
+##  1 audi         a4           1.8  1999     4 auto(l5)   f        18    29
+##  2 audi         a4           1.8  1999     4 manual(m5) f        21    29
+##  3 audi         a4           2    2008     4 manual(m6) f        20    31
+##  4 audi         a4           2    2008     4 auto(av)   f        21    30
+##  5 audi         a4           2.8  1999     6 auto(l5)   f        16    26
+##  6 audi         a4           2.8  1999     6 manual(m5) f        18    26
+##  7 audi         a4           3.1  2008     6 auto(av)   f        18    27
+##  8 audi         a4 quattro   1.8  1999     4 manual(m5) 4        18    26
+##  9 audi         a4 quattro   1.8  1999     4 auto(l5)   4        16    25
+## 10 audi         a4 quattro   2    2008     4 manual(m6) 4        20    28
+##    fl    class     one
+##    <chr> <chr>   <dbl>
+##  1 p     compact     1
+##  2 p     compact     1
+##  3 p     compact     1
+##  4 p     compact     1
+##  5 p     compact     1
+##  6 p     compact     1
+##  7 p     compact     1
+##  8 p     compact     1
+##  9 p     compact     1
+## 10 p     compact     1
+## # ... with 224 more rows
 \end{verbatim}
 
 上の例では\texttt{one}という列を作り、すべての行を1で埋めたが、これはあまり実践的ではない。
@@ -2957,19 +3044,31 @@ patchworkを使うと、たとえば下のように、複数のパネルを直�
 
 \begin{verbatim}
 ## # A tibble: 234 x 12
-##    manufacturer model displ  year   cyl trans drv     cty   hwy fl    class
-##    <chr>        <chr> <dbl> <int> <int> <chr> <chr> <int> <int> <chr> <chr>
-##  1 audi         a4      1.8  1999     4 auto~ f        18    29 p     comp~
-##  2 audi         a4      1.8  1999     4 manu~ f        21    29 p     comp~
-##  3 audi         a4      2    2008     4 manu~ f        20    31 p     comp~
-##  4 audi         a4      2    2008     4 auto~ f        21    30 p     comp~
-##  5 audi         a4      2.8  1999     6 auto~ f        16    26 p     comp~
-##  6 audi         a4      2.8  1999     6 manu~ f        18    26 p     comp~
-##  7 audi         a4      3.1  2008     6 auto~ f        18    27 p     comp~
-##  8 audi         a4 q~   1.8  1999     4 manu~ 4        18    26 p     comp~
-##  9 audi         a4 q~   1.8  1999     4 auto~ 4        16    25 p     comp~
-## 10 audi         a4 q~   2    2008     4 manu~ 4        20    28 p     comp~
-## # ... with 224 more rows, and 1 more variable: engine <chr>
+##    manufacturer model      displ  year   cyl trans      drv     cty   hwy
+##    <chr>        <chr>      <dbl> <int> <int> <chr>      <chr> <int> <int>
+##  1 audi         a4           1.8  1999     4 auto(l5)   f        18    29
+##  2 audi         a4           1.8  1999     4 manual(m5) f        21    29
+##  3 audi         a4           2    2008     4 manual(m6) f        20    31
+##  4 audi         a4           2    2008     4 auto(av)   f        21    30
+##  5 audi         a4           2.8  1999     6 auto(l5)   f        16    26
+##  6 audi         a4           2.8  1999     6 manual(m5) f        18    26
+##  7 audi         a4           3.1  2008     6 auto(av)   f        18    27
+##  8 audi         a4 quattro   1.8  1999     4 manual(m5) 4        18    26
+##  9 audi         a4 quattro   1.8  1999     4 auto(l5)   4        16    25
+## 10 audi         a4 quattro   2    2008     4 manual(m6) 4        20    28
+##    fl    class   engine
+##    <chr> <chr>   <chr> 
+##  1 p     compact good  
+##  2 p     compact good  
+##  3 p     compact good  
+##  4 p     compact good  
+##  5 p     compact good  
+##  6 p     compact good  
+##  7 p     compact bad   
+##  8 p     compact good  
+##  9 p     compact good  
+## 10 p     compact good  
+## # ... with 224 more rows
 \end{verbatim}
 
 \subsection{列名を変更}
@@ -2985,18 +3084,30 @@ patchworkを使うと、たとえば下のように、複数のパネルを直�
 
 \begin{verbatim}
 ## # A tibble: 234 x 11
-##    manufacturer model displ   nen   cyl trans drv     cty   hwy fl    class
-##    <chr>        <chr> <dbl> <int> <int> <chr> <chr> <int> <int> <chr> <chr>
-##  1 audi         a4      1.8  1999     4 auto~ f        18    29 p     comp~
-##  2 audi         a4      1.8  1999     4 manu~ f        21    29 p     comp~
-##  3 audi         a4      2    2008     4 manu~ f        20    31 p     comp~
-##  4 audi         a4      2    2008     4 auto~ f        21    30 p     comp~
-##  5 audi         a4      2.8  1999     6 auto~ f        16    26 p     comp~
-##  6 audi         a4      2.8  1999     6 manu~ f        18    26 p     comp~
-##  7 audi         a4      3.1  2008     6 auto~ f        18    27 p     comp~
-##  8 audi         a4 q~   1.8  1999     4 manu~ 4        18    26 p     comp~
-##  9 audi         a4 q~   1.8  1999     4 auto~ 4        16    25 p     comp~
-## 10 audi         a4 q~   2    2008     4 manu~ 4        20    28 p     comp~
+##    manufacturer model      displ   nen   cyl trans      drv     cty   hwy
+##    <chr>        <chr>      <dbl> <int> <int> <chr>      <chr> <int> <int>
+##  1 audi         a4           1.8  1999     4 auto(l5)   f        18    29
+##  2 audi         a4           1.8  1999     4 manual(m5) f        21    29
+##  3 audi         a4           2    2008     4 manual(m6) f        20    31
+##  4 audi         a4           2    2008     4 auto(av)   f        21    30
+##  5 audi         a4           2.8  1999     6 auto(l5)   f        16    26
+##  6 audi         a4           2.8  1999     6 manual(m5) f        18    26
+##  7 audi         a4           3.1  2008     6 auto(av)   f        18    27
+##  8 audi         a4 quattro   1.8  1999     4 manual(m5) 4        18    26
+##  9 audi         a4 quattro   1.8  1999     4 auto(l5)   4        16    25
+## 10 audi         a4 quattro   2    2008     4 manual(m6) 4        20    28
+##    fl    class  
+##    <chr> <chr>  
+##  1 p     compact
+##  2 p     compact
+##  3 p     compact
+##  4 p     compact
+##  5 p     compact
+##  6 p     compact
+##  7 p     compact
+##  8 p     compact
+##  9 p     compact
+## 10 p     compact
 ## # ... with 224 more rows
 \end{verbatim}
 
@@ -3057,7 +3168,7 @@ patchworkを使うと、たとえば下のように、複数のパネルを直�
 ここでは、\texttt{mpg}ではなく、架空のデータセットを作ってみよう。たとえば、以下のような状況を考えてみてほしい。
 
 \begin{quote}
-たかし君とはなこさんは、以前見たテレビドラマを思い出して「足袋を履いたときと、裸足のときとで、どっちが走るのが早くなるだろうか？」と疑問に思いました。そこで2人は、5日間のうち3日は足袋を履いて、2日は裸足で自宅から学校まで走り、到着までの所要時間を測りました。
+たかし君とはなこさんは、以前見たテレビドラマに感化されて、「足袋を履いたときと、裸足のときとで、どっちが走るのが早くなるだろうか？」と疑問に思いました。そこで2人は、5日間のうち3日は足袋を履いて、2日は裸足で自宅から学校まで走り、到着までの所要時間を測りました。
 \end{quote}
 
 2人の毎日の所要時間データは\texttt{commute}というデータフレームとして保存しよう。
@@ -3190,11 +3301,11 @@ patchworkを使うと、たとえば下のように、複数のパネルを直�
 \section{ロングフォーマット}
 
 以下の架空のデータフレーム（X, Y,
-Zという3つの株価の増減比の時系列データ）があるとしよう。
+Zという3つの株価の増減比の時系列データ）があったとしよう。
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{) }\CommentTok{# 乱数のシードを設定}
 \NormalTok{stocks =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}
   \DataTypeTok{time =} \KeywordTok{as.Date}\NormalTok{(}\StringTok{'2009-01-01'}\NormalTok{) }\OperatorTok{+}\StringTok{ }\DecValTok{0}\OperatorTok{:}\DecValTok{9}\NormalTok{,}
   \DataTypeTok{X =} \KeywordTok{rnorm}\NormalTok{(}\DecValTok{10}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{),}
@@ -3220,9 +3331,9 @@ Zという3つの株価の増減比の時系列データ）があるとしよう
 ## 10 2009-01-10 -0.3053884  1.18780264  1.6717662
 \end{verbatim}
 
-このとき、3つの株価の時系列変化をプロットしてみたいが、このままではうまくいかない。なぜなら、データがロングフォーマット（列に変数名、行にデータ）という形式になっていないからである。このようなデータをワイドフォーマットと言う。
+このとき、3つの株価の時系列変化をプロットしてみたいが、このままではうまくいかない。なぜなら、データがロングフォーマット（列に変数名、行にデータ）という形式になっていないからである。上の表のようなデータ形式をワイドフォーマットと言う。
 
-データをロングフォーマットに変えるには、\texttt{gather()}を使えば良い。書き方は、\texttt{gather(key\ =\ "新しく作るラベル",\ value\ =\ "新しく作る数値",\ ロングにしたい列（複数個）)}である。文章ではわかりにくいと思うので、以下のコードを見てほしい。
+データをロングフォーマットに変えるには、\texttt{gather()}を使えば良い。書き方は、\texttt{gather(key\ =\ "新しく作るラベル",\ value\ =\ "新しく作る数値",\ ロングにしたい列（複数個）)}である。文章ではわかりにくいと思うので、以下のコードを見て、何をやっているのかを理解してほしい。
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3271,7 +3382,7 @@ Zという3つの株価の増減比の時系列データ）があるとしよう
 
 \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
 
-元のワイドフォーマットに戻したい場合は、\texttt{spread()}を使えば良い。書き方は\texttt{spread(key\ =\ ワイドにする列,\ value\ =\ ワイドにする値)}である。これも文章ではわかりにくいと思うので、以下のコードを見てほしい。
+ロングフォーマットのデータをワイドフォーマットに戻したい場合は、\texttt{spread()}を使えば良い。書き方は\texttt{spread(key\ =\ ワイドにする列,\ value\ =\ ワイドにする値)}である。これも文章ではわかりにくいと思うので、以下のコードを見てほしい。
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3302,7 +3413,7 @@ Zという3つの株価の増減比の時系列データ）があるとしよう
 
 データの読み込みについては、各人の都合があると思うので、周りの人に尋ねてみてほしい\footnote{「言語化して説明するのが大変」とは言えない。}。
 
-\section{ggplot2と一緒に使う}\label{ggplot2}
+\section{ggplot2との併用}\label{ggplot2}
 
 パイプ演算子（\texttt{\%\textgreater{}\%}）を使うと、以下のようにデータハンドリングと可視化をシームレスにつなげることができる。下の例では、平均値と標準誤差をグループごとに計算し、棒グラフとエラーバーを描いている。
 
@@ -3349,7 +3460,7 @@ Zという3つの株価の増減比の時系列データ）があるとしよう
   \item
     可視化やデザインの基本について教えてくれる。
   \item
-    このサイト自体にコードは載っていないが、可視化において注意しなければならないことがたくさん書いてある。
+    このサイト自体にコードは載っていないが、可視化における重要事項がたくさん書いてある。
   \item
     筆者のGitHubページに行けばコードも見ることができる。
   \end{itemize}
